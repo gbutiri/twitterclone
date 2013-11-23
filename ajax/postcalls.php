@@ -38,7 +38,7 @@ function makeapost() {
 	$sql = "INSERT INTO posts (
 		`details`,`dtm`,`poster`
 	) VALUES (
-		'".addslashes(trim($_POST['writearea']))."','".date("Y-m-d H:i:s")."','gbutiri'
+		'".addslashes(trim($_POST['writearea']))."','".date("Y-m-d H:i:s")."','"._USERNAME."'
 	)";
 	mysql_query($sql);
 	

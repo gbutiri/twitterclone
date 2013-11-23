@@ -68,8 +68,8 @@ $(document).ready(function(){
 				
 			}
 		});
-	}).on('submit','#signin-form',function(e) {
-		var $this = $('#signin-form');
+	}).on('submit','#signin-form,#signup-form',function(e) {
+		var $this = $(this);
 		console.log($this.serialize());
 		e.preventDefault();
 		$.ajax({
@@ -79,6 +79,20 @@ $(document).ready(function(){
 			data: $this.serialize(),
 			success: function(data) {
 				console.log(data);
+				if (data.error == false) {
+					window.location = '/';
+				}
+			}
+		});
+	}).on('click','#logout-link',function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/registration.php?action=logout',
+			dataType: 'JSON',
+			success: function (data) {
+				if (data.error == false) {
+					window.location = '/login.php';
+				}
 			}
 		});
 	});

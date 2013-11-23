@@ -1,4 +1,5 @@
 <?php 
+session_start();
 define('_ENV','local');
 define('_DBNAME','fbclone');
 define('_DBUSER','root');

@@ -14,3 +14,8 @@ include (_DOCROOT.'/includes/pre-header.php');
 </head>
 <body>
 <div class="page-wrapper">
+<nav>
+	<?php if (_USERNAME != '') { ?>
+	<a id="logout-link" href="/logout">Logout</a>
+	<?php } ?>
+</nav>
