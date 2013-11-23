@@ -6,7 +6,7 @@ if (_USERNAME == '' && $strposlogin === false) {
 	header('location: /login.php');
 }
 
-define ('_TITLE',"Facebook Clone!");
+define ('_TITLE',"ceau.ro");
 $db = new DB();
 $db->open();
 
