@@ -15,7 +15,7 @@ include (_DOCROOT.'/includes/pre-header.php');
 <body>
 <div class="page-wrapper">
 <nav>
-	<a class="logo" href="/"><span class="logo-t">t</span><span class="logo-witter">witter</span><span class="logo-c">c</span><span class="logo-lone">lone</span></a>
+	<a class="logo" href="/">ceau<span>.ro</span></a>
 	<?php if (_USERNAME != '') { ?>
 	<a id="logout-link" href="/logout">Logout</a>
 	<?php } ?>

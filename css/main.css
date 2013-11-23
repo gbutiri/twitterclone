@@ -151,13 +151,11 @@ a:hover {
 
 .logo {
 	text-decoration: none;
-}
-.logo-t, .logo-c {
-	color: #333;
 	font-weight: bold;
 }
-.logo-witter, .logo-lone {
-	color: #999;
+.logo span {
+	color: #333;
+	font-weight: normal;
 }
 .username {
 	margin-right: 20px;
