@@ -14,6 +14,14 @@ ul, li {
 	margin: 0;
 	padding: 0;
 }
+a {
+	color: #59B356;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover {
+	color: #3EA022;
+}
 
 /* The general area */
 .autosize {
@@ -135,4 +143,25 @@ ul, li {
 	background-color: #333;
 	color: #fff;
 	cursor: pointer;
+}
+
+#logout-link {
+	float: right;
+}
+
+.logo {
+	text-decoration: none;
+}
+.logo-t, .logo-c {
+	color: #333;
+	font-weight: bold;
+}
+.logo-witter, .logo-lone {
+	color: #999;
+}
+.username {
+	margin-right: 20px;
+	float: right;
+	font-weight: bold;
+	color: #333;
 }
