@@ -9,11 +9,9 @@ This project took me less than a day. Here's the feature list:
 * Smart time detection for reading (based on browser GMT offset).
 * Cross browser autosizing textarea.
 * Load more button if more texts.
-
-!!! Important !!!
-This only works for one account currently. 
-I will be working on a new version to create logins, and database setup in install files.
+* Users and logins with salt, tokens, etc.
 
 To Come:
-* Users and logins with email verifications.
+* Signup Email Verification coming soon.
+* Notification system for showing warning and errors upon signup/login.
 * Database install similar to wordpress.
