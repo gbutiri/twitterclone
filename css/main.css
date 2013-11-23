@@ -6,7 +6,7 @@ body,html {
 html, textarea, buton {
 	font-family: 'Open Sans', sans-serif;
 }
-button, textarea {
+button, textarea, input {
 	outline: none;
 }
 ul, li {
@@ -108,4 +108,31 @@ ul, li {
 	float: right;
 	font-size: 10px;
 	color: #ccc;
+}
+
+
+/* The Sign Up / In Forms */
+.registration-forms {
+	
+}
+.registration-forms input {
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #999;
+	border-radius: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.registration-forms button {
+	width: 100%;
+	padding: 10px 0;
+	display: block;
+	margin-top: 10px;
+	border: 0;
+	font-size: 20px;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
 }

@@ -68,6 +68,19 @@ $(document).ready(function(){
 				
 			}
 		});
+	}).on('submit','#signin-form',function(e) {
+		var $this = $('#signin-form');
+		console.log($this.serialize());
+		e.preventDefault();
+		$.ajax({
+			url: $this.attr('action'),
+			type: 'POST',
+			dataType: 'JSON',
+			data: $this.serialize(),
+			success: function(data) {
+				console.log(data);
+			}
+		});
 	});
 	
 	var autosize = function($this) {
@@ -95,7 +108,9 @@ $(document).ready(function(){
 			}
 		});
 	}
-	loadInitialMessages();
+	if ($('#tweets').length > 0 && $('#write-area').length > 0) {
+		loadInitialMessages();
+	}
 	
 	var loadLatestMessages = function () {
 		var $latestMessage = $(document).find('#tweets li').first();
@@ -123,7 +138,9 @@ $(document).ready(function(){
 			siteclock();
 		},2000);
 	}
-	siteclock();
+	if ($('#tweets').length > 0 && $('#write-area').length > 0) {
+		siteclock();
+	}
 	
 	$('.autosize').css('overflow', 'hidden').on('keyup',function(e) {
 		var $this = $(this);
