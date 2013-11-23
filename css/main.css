@@ -1,0 +1,111 @@
+/* The basic area */
+body,html {
+	margin: 0;
+	padding: 0;
+}
+html, textarea, buton {
+	font-family: 'Open Sans', sans-serif;
+}
+button, textarea {
+	outline: none;
+}
+ul, li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* The general area */
+.autosize {
+	resize: none;
+	height: 20px;
+	min-height:20px;
+	overflow: hidden;
+}
+.page-wrapper {
+	width: 600px;
+	margin: auto;
+}
+
+/* The interactive area */
+#write-form {
+	width: 100%;
+}
+.write-container {
+	border: 5px solid #aaa;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px 0 0;
+}
+#write-area {
+	border: 0;
+	font-size: 14px;
+	padding: 0;
+	display: block;
+	color: #ccc;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	line-height: 18px;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	overflow: hidden;
+}
+#write-area.active {
+	color: #333;
+}
+#load-more {
+	display: none;
+	border: 0;
+	background-color: #59B356;
+	padding: 5px 0;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 5px;
+	margin: 10px 0 10px;
+}
+#post-button {
+	border: 0;
+	background-color: #59B356;
+	padding: 5px 0;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 5px;
+	margin: 10px 0 0;
+}
+#post-button:hover {
+	background-color: #3EA022;
+}
+
+
+/* The tweet area */
+#tweets {
+	font-size: 14px;
+}
+#tweets li {
+	padding: 5px;
+	overflow: hidden;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #ddd;
+}
+#tweets .poster {
+	font-weight: bold;
+}
+#tweets .content {
+
+}
+#tweets .time {
+	float: right;
+	font-size: 10px;
+	color: #ccc;
+}

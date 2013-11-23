@@ -1,0 +1,132 @@
+var objLocalZone = new Date();
+var objLocalZoneBit = parseInt(objLocalZone.toString().split(" ")[5].replace("GMT",""))/100;
+// testing for Romania timezone.
+//	objLocalZoneBit = "+2";
+
+$(document).ready(function(){
+	$(document).on('focus','#write-area',function(e){
+		var $this = $(this);
+		if ($this.val() == $this.attr('place-holder')) {
+			$this.val('');
+		}
+		$this.addClass('active');
+	}).on('blur','#write-area',function(e){
+		var $this = $(this);
+		if ($this.val() == '') {
+			$this.val($this.attr('place-holder'));
+			$this.removeClass('active');
+		}
+	}).on('click','#post-button',function(e){
+		e.preventDefault();
+		var $writearea = $('#write-area');
+		if ($writearea.val() != $writearea.attr('place-holder')) {
+			var $val = $('#write-area').serialize();
+			$writearea.val('');
+			autosize($writearea);
+			$.ajax({
+				url: '/ajax/postcalls.php?action=makeapost&timezone',
+				type: 'POST',
+				dataType: 'JSON',
+				data: $val,
+				success: function(data) {
+					//console.log(data);
+					$writearea.val($writearea.attr('place-holder'));
+				}
+			});
+		}
+	}).on('keyup','#write-area',function(e) {
+		if (e.keyCode == 13) {
+			$('#post-button').trigger('click');
+			$('#write-area').blur();
+		}
+		if ($('#write-area').val().length > 140) {
+			$('#write-area').val($('#write-area').val().substr(0,140));
+		}
+	}).on('click','#load-more',function (e) {
+		var $firstMessage = $(document).find('#tweets li').last();
+		if ($firstMessage[0]) {
+			$firstId = $firstMessage[0].id.replace('post_','');
+		} else {
+			$firstId = 0;
+		}
+		$.ajax({
+			url: '/ajax/postcalls.php?action=loadmore&firstid='+$firstId+'&timezone='+objLocalZoneBit,
+			type: 'GET',
+			dataType:'JSON',
+			success:function(data) {
+				if (data.nummore == data.messagesleft) {
+					if(data.messages != '') {
+						$('#tweets').append(data.messages);
+					}
+					$('#load-more').remove();
+				} else {
+					$('#load-more').show();
+					$('#tweets').append(data.messages);
+					console.log(data.nummore - data.messagesleft);
+					$(document).find('#load-more span').text(data.nummore - data.messagesleft);
+				}
+				
+			}
+		});
+	});
+	
+	var autosize = function($this) {
+		$this.height(0);
+		$this.height($this[0].scrollHeight);
+	}
+	
+	var loadInitialMessages = function () {
+		$.ajax({
+			url:'/ajax/postcalls.php?action=loadinitialmessages&timezone='+objLocalZoneBit,
+			type:'GET',
+			dataType:'JSON',
+			success:function(data) {
+				if (data.nummore == data.messagesleft) {
+					if(data.messages != '') {
+						$('#tweets').append(data.messages);
+					}
+					$('#load-more').remove();
+				} else {
+					$('#load-more').show();
+					$('#tweets').append(data.messages);
+					console.log(data.nummore - data.messagesleft);
+					$(document).find('#load-more span').text(data.nummore - data.messagesleft);
+				}
+			}
+		});
+	}
+	loadInitialMessages();
+	
+	var loadLatestMessages = function () {
+		var $latestMessage = $(document).find('#tweets li').first();
+		if ($latestMessage[0]) {
+			$lastId = $latestMessage[0].id.replace('post_','');
+		} else {
+			$lastId = 0;
+		}
+
+		$.ajax({
+			url:'/ajax/postcalls.php?action=getlatestposts&lastid='+$lastId+'&timezone='+objLocalZoneBit,
+			type:'GET',
+			dataType:'JSON',
+			success:function(data) {
+				$('#tweets').prepend(data.messages);
+			}
+		});
+	}
+	
+	var k;
+	var siteclock = function () {
+		clearTimeout(k);
+		k = setTimeout(function(){
+			loadLatestMessages();
+			siteclock();
+		},2000);
+	}
+	siteclock();
+	
+	$('.autosize').css('overflow', 'hidden').on('keyup',function(e) {
+		var $this = $(this);
+		autosize($this);
+	});
+});
