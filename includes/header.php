@@ -4,10 +4,7 @@
 	<title><?php echo _TITLE;?></title>
 	<meta charset="utf-8" />
 
-<meta name="viewport" content="width=520, target-densitydpi=high-dpi" />
-<meta http-equiv="Content-Type" content="application/vnd.wap.xhtml+xml; charset=utf-8" />
-<meta name="HandheldFriendly" content="true" />
-<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /> <!--320-->
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/css/main.css" />
