@@ -31,7 +31,8 @@ a:hover {
 	overflow: hidden;
 }
 .page-wrapper {
-	width: 600px;
+	max-width: 600px;
+	width: 100%;
 	margin: auto;
 }
 
@@ -176,7 +177,8 @@ a:hover {
 }
 
 footer {
-	width: 600px;
+	max-width: 600px;
+	width: 100%;
 	margin: 20px auto;
 }
 
