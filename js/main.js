@@ -50,8 +50,12 @@ $(document).ready(function(){
 		} else {
 			$firstId = 0;
 		}
+		var $username = $('#tweets').attr('data-username');
+		if (typeof($username) === 'undefined') {
+			$username = '';
+		}
 		$.ajax({
-			url: '/ajax/postcalls.php?action=loadmore&firstid='+$firstId+'&timezone='+objLocalZoneBit,
+			url: '/ajax/postcalls.php?action=loadmore&username='+$username+'&firstid='+$firstId+'&timezone='+objLocalZoneBit,
 			type: 'GET',
 			dataType:'JSON',
 			success:function(data) {

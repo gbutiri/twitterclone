@@ -84,12 +84,18 @@ function loadmore() {
 	include(_DOCROOT.'/templates/post-templates.php');
 	$firstId = $_GET['firstid'];
 	
-	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts WHERE id < ".$firstId." ORDER BY id DESC";
+	$username = $_GET['username'];
+	$sql_where = "";
+	if ($username != '') {
+		$sql_where = " AND poster = '".$username."' ";
+	}
+	
+	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC";
 	$res_a = mysql_query($sql_a);
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
 	
-	$sql = "SELECT * FROM posts WHERE id < ".$firstId." ORDER BY id DESC LIMIT 10";
+	$sql = "SELECT * FROM posts WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC LIMIT 10";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
