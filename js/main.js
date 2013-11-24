@@ -63,7 +63,7 @@ $(document).ready(function(){
 				} else {
 					$('#load-more').show();
 					$('#tweets').append(data.messages);
-					console.log(data.nummore - data.messagesleft);
+					//console.log(data.nummore - data.messagesleft);
 					$(document).find('#load-more span').text(data.nummore - data.messagesleft);
 				}
 				
@@ -71,7 +71,7 @@ $(document).ready(function(){
 		});
 	}).on('submit','#signin-form,#signup-form',function(e) {
 		var $this = $(this);
-		console.log($this.serialize());
+		//console.log($this.serialize());
 		e.preventDefault();
 		$.ajax({
 			url: $this.attr('action'),
@@ -102,17 +102,19 @@ $(document).ready(function(){
 		e.preventDefault();
 		$('#fuzz').remove();
 	}).on('click','#fuzz',function(e) {
-		e.preventDefault();
 		var $this = $(this)[0].id;
 		var $target = $(e.target)[0].id;
 		//console.log(e,$this,$target);
 		if ($this == $target) {
+			e.preventDefault();
 			$('#fuzz').remove();
 		}
 	});
 	
 	var notify = function (message) {
-		$(document).find('body').append('<div id="fuzz"><div id="notification">'+message+'<a id="fuzz-close" href="#close">&times;</a></div></div>');
+		if ($('#fuzz').length == 0) {
+			$(document).find('body').append('<div id="fuzz"><div id="notification">'+message+'<a id="fuzz-close" href="#close">&times;</a></div></div>');
+		}
 	}
 	
 	var autosize = function($this) {
@@ -134,7 +136,7 @@ $(document).ready(function(){
 				} else {
 					$('#load-more').show();
 					$('#tweets').append(data.messages);
-					console.log(data.nummore - data.messagesleft);
+					//console.log(data.nummore - data.messagesleft);
 					$(document).find('#load-more span').text(data.nummore - data.messagesleft);
 				}
 			}
@@ -144,6 +146,7 @@ $(document).ready(function(){
 		loadInitialMessages();
 	}
 	
+	var k;
 	var loadLatestMessages = function () {
 		var $latestMessage = $(document).find('#tweets li').first();
 		if ($latestMessage[0]) {
@@ -158,11 +161,14 @@ $(document).ready(function(){
 			dataType:'JSON',
 			success:function(data) {
 				$('#tweets').prepend(data.messages);
+			},
+			error: function() {
+				notify('<div>Ceva s-a intamplat. Va rugam sa incercati din nou. <a href="/">Reveniti!</a></div>');
+				clearTimeout(k);
 			}
 		});
 	}
 	
-	var k;
 	var siteclock = function () {
 		clearTimeout(k);
 		k = setTimeout(function(){
