@@ -1,5 +1,6 @@
 var objLocalZone = new Date();
-var objLocalZoneBit = parseInt(objLocalZone.toString().split(" ")[5].replace("GMT",""))/100;
+var servertime = 6;
+var objLocalZoneBit = (parseInt(objLocalZone.toString().split(" ")[5].replace("GMT",""))/100)+servertime;
 // testing for Romania timezone.
 //	objLocalZoneBit = "+2";
 
@@ -78,7 +79,9 @@ $(document).ready(function(){
 			dataType: 'JSON',
 			data: $this.serialize(),
 			success: function(data) {
-				console.log(data);
+				if (data.error == true) {
+					notify(data.message);
+				}
 				if (data.error == false) {
 					window.location = '/';
 				}
@@ -95,7 +98,22 @@ $(document).ready(function(){
 				}
 			}
 		});
+	}).on('click','#fuzz-close',function(e) {
+		e.preventDefault();
+		$('#fuzz').remove();
+	}).on('click','#fuzz',function(e) {
+		e.preventDefault();
+		var $this = $(this)[0].id;
+		var $target = $(e.target)[0].id;
+		//console.log(e,$this,$target);
+		if ($this == $target) {
+			$('#fuzz').remove();
+		}
 	});
+	
+	var notify = function (message) {
+		$(document).find('body').append('<div id="fuzz"><div id="notification">'+message+'<a id="fuzz-close" href="#close">&times;</a></div></div>');
+	}
 	
 	var autosize = function($this) {
 		$this.height(0);

@@ -25,7 +25,7 @@ function trylogin() {
 	if (!$posterFound) {
 		$retArray = array(
 			'error' => true,
-			'message' => 'Username, email or password incorrect.'
+			'message' => 'Numele is parola sunt incorecte.'
 		);
 	} else {
 		$token = md5($row_un['username']);
@@ -71,10 +71,10 @@ function trysignup() {
 	'/^([*+!.&#$¦\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i' ; 
 
 	if (mysql_num_rows($res_un) > 0) {
-		$err.="<div>Username not available. Use a different username.</div>";
+		$err.="<div>Numele nu e valabil. Folositi al nume.</div>";
 	}
 	if ($row_em['emailcount'] > 0) {
-		$err.="<div>Email already registered. Use a different email address.</div>";
+		$err.="<div>Emailul acesta deja exista. Folositi un email diferit.</div>";
 	/*
 	} 
 	if (!preg_match('/^[a-zA-Z0-9]+$/i', $_POST['signup-fname']) || strlen(trim($_POST['signup-fname'])) < 2) {
@@ -85,13 +85,13 @@ function trysignup() {
 	*/
 	}
 	if (strlen(trim($_POST['signup-username'])) < 6) {
-		$err.="<div>Username too short.</div>";
+		$err.="<div>Numele e prea scurt.</div>";
 	} 
 	if (!preg_match('/^[a-zA-Z0-9]+$/i', $_POST['signup-username'])) {	 
-		$err.="<div>Only use letters and numbers in the username field.</div>";
+		$err.="<div>Folositi numai litere si numere pentru nume. Spatiu nu e valid.</div>";
 	} 
 	if (!preg_match($regex, trim($_POST['signup-email']))) {
-		$err.="<div>Incorrect email address format. Use 'user@domain.com'</div>";
+		$err.="<div>Formatul emailului nu e corect. Folositi formatul 'nume@domeniu.com'</div>";
 	/*
 	} 
 	if ($_POST['repeat_email'] != $_POST['signup-email']) {
@@ -102,16 +102,16 @@ function trysignup() {
 	*/
 	} 
 	if( strlen($_POST['signup-password']) < 6 ) {
-		$err .= "<div>Password too short. Must be at least 6 characters.</div>";
+		$err .= "<div>Parola e prea scurta. Trebuie sa fie cel putin 6 cifre / litere.</div>";
 	} 
 	if( strlen($_POST['signup-password']) > 20 ) {
-		$err .= "<div>Password too long. Must be no longer than 20 characters.</div>";
+		$err .= "<div>Parola e prea lunga. Limita e 20 de cifre / litere.</div>";
 	} 
 	if( !preg_match("#[0-9]+#", $_POST['signup-password']) ) {
-		$err .= "<div>Password must include at least one number!</div>";
+		$err .= "<div>Folositi cel putin o cifra pentru parola.</div>";
 	} 
 	if( !preg_match("#[a-zA-Z]+#", $_POST['signup-password']) ) {
-		$err .= "<div>Password must include at least one letter!</div>";
+		$err .= "<div>Folositi cel putin o litera pentru parola.</div>";
 	/*
 	} 
 	if (!checkValidDate($_POST['month'],$_POST['day'],$_POST['year'])) {
@@ -164,7 +164,7 @@ function trysignup() {
 		$to = trim($_POST['signup-email']);
 		//$to = trim("MovieMaker713@gmail.com");
 		$subject = "Inregistrarea cu ceau.ro";
-		$message = 'Apasati <a href="'._SITE.'/botifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+		$message = 'Apasati <a href="'._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
 		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
             'Reply-To: george@actingshowcase.com' . "\r\n" .
             'MIME-Version: 1.0' . "\r\n" .
@@ -231,10 +231,10 @@ function checkPassword ($pwd) {
 
 function checkUsername ($username) {
 	$error="";
-	if( strlen($username) < 6 ) {$error = "Username too short. Must be at least 6 characters.";}
-	elseif( strlen($username) > 20 ) {$error = "Username too long. Must be no longer than 20 characters.";}
-	elseif( !preg_match("#[0-9a-zA-Z_\-]+#", $username) ) {$error = "Username can only include letters, numbers, dash ( - ), and underscore ( _ )!";}
-	elseif( preg_match("#\W+#", $username) && !preg_match("#[-]+#", $username) ) {$error = "Username can only include letters, numbers, and underscore ( _ )!";}
+	if( strlen($username) < 6 ) {$error = "Numele e prea scurt. Folositi minim 6 litere / cifre.";}
+	elseif( strlen($username) > 20 ) {$error = "Numele e prea lung. Folsiti maxim 20 litere / cifre.";}
+	elseif( !preg_match("#[0-9a-zA-Z_\-]+#", $username) ) {$error = "Pentru nume, folisiti numai litere, cifre, liniuta ( - ), si subliniere ( _ ).";}
+	elseif( preg_match("#\W+#", $username) && !preg_match("#[-]+#", $username) ) {$error = "Pentru nume, folisiti numai litere, cifre, liniuta ( - ), si subliniere ( _ ).";}
 	if($error!=""){
 		return $error;
 	} else {
