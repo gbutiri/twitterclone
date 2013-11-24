@@ -1,5 +1,6 @@
 <?php 
 include ('config.php');
+include (_DOCROOT.'/includes/pre-header.php');
 include (_DOCROOT.'/includes/header.php');
 ?>
 <div class="main-billboard">
@@ -23,4 +24,5 @@ Conectați-vă cu prieteni Români!
 </form>
 <?php
 include (_DOCROOT.'/includes/footer.php');
+$db->close();
 ?>

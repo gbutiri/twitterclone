@@ -1,6 +1,3 @@
-<?php 
-include (_DOCROOT.'/includes/pre-header.php');
-?>
 <!doctype html>
 <html>
 <head>
