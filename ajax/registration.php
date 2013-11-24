@@ -124,6 +124,7 @@ function trysignup() {
 			"message" => $err
 		);
 	} else {
+		$verifyToken = md5(time());
 		$sql="INSERT INTO signup (
 			`username`,
 			`email`,
@@ -131,7 +132,8 @@ function trysignup() {
 			`added`,
 			`lastlogin`,
 			`salt`,
-			`token`
+			`token`,
+			`verifytoken`
 		) VALUES (
 			'".trim($_POST['signup-username'])."',
 			'".trim($_POST['signup-email'])."',
@@ -139,7 +141,8 @@ function trysignup() {
 			'".date("Y-m-d H:i:s")."',
 			'".date("Y-m-d H:i:s")."',
 			'".$salt."',
-			'".$token."'
+			'".$token."',
+			'".$verifyToken."'
 		)";
 		//echo($sql);
 		mysql_query($sql);
@@ -157,9 +160,28 @@ function trysignup() {
 			setcookie("fbclone_token","",time()-3600,'/');
 			setcookie("fbclone_salt","",time()-3600,'/');
 		}
-		$retArray = array(
-			"error" => false
-		);
+		
+		$to = trim($_POST['signup-email']);
+		//$to = trim("MovieMaker713@gmail.com");
+		$subject = "Inregistrarea cu ceau.ro";
+		$message = 'Apasati <a href="'._SITE.'/botifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
+            'Reply-To: george@actingshowcase.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+			
+		if (mail($to,$subject,$message,$headers)) {
+			$retArray = array(
+				"error" => false
+			);
+		} else {
+			echo "Unable to send mail.";
+			$retArray = array(
+				"error" => true,
+				"message" => "Unable to send mail"
+			);
+		}
 
 	}
 	echo json_encode($retArray);

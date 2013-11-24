@@ -50,7 +50,7 @@ function runinstall() {
 		$file_contents = str_replace($command.PHP_EOL.PHP_EOL,"",$file_contents);
 		
 		if (strpos($command,"/*") === false) {
-			var_dump($command);
+			echo($command);
 			$res = mysql_query($command);
 			var_dump($res);
 		}

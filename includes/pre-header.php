@@ -10,6 +10,18 @@ define ('_TITLE',"ceau.ro");
 $db = new DB();
 $db->open();
 
+// verify email verification
+$sql_ev = "SELECT COUNT(*) AS usercount, emailverified FROM signup WHERE username = '"._USERNAME."'";
+$res_ev = mysql_query($sql_ev);
+//var_dump(mysql_num_rows($res_ev));
+$row_ev = mysql_fetch_assoc($res_ev);
+
+if ($row_ev['usercount'] > 0) {
+	if ($row_ev['emailverified'] == 0) {
+		header('location: /notifications.php?action=emailunverified');
+	}
+}
+
 // check for cookie token and salt.
 if (isset($_COOKIE['fbclone_username']) && $_COOKIE['fbclone_username'] != "") {
 	$sql = "SELECT salt, token FROM signup WHERE username = '".$_COOKIE['fbclone_username']."'";

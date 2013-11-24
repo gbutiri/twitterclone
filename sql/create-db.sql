@@ -1,6 +1,6 @@
 /*
 SQLyog Community v11.28 (64 bit)
-MySQL - 5.5.24-log : Database - fbclone
+MySQL - 5.1.63-rel13.4-log : Database - gbutiri_fbclone
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 5.5.24-log : Database - fbclone
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`fbclone` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`gbutiri_fbclone` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `fbclone`;
+USE `gbutiri_fbclone`;
 
 /*Table structure for table `posts` */
 
@@ -26,7 +26,7 @@ CREATE TABLE `posts` (
   `dtm` datetime DEFAULT NULL,
   `poster` varchar(20) DEFAULT 'admin',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `signup` */
 
@@ -44,6 +44,7 @@ CREATE TABLE `signup` (
   `lastlogin` datetime DEFAULT NULL,
   `added` datetime DEFAULT NULL,
   `emailverified` tinyint(1) NOT NULL DEFAULT '0',
+  `verifytoken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
