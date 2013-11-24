@@ -22,4 +22,9 @@ function makeuserfolders() {
 	echo "User Folders Created!";
 }
 
+function setmainimg() {
+	$sql = "UPDATE signup SET mainimgid = 0 WHERE mainimgid = ''";
+	$res = mysql_query($sql);
+}
+
 ?>
