@@ -28,6 +28,7 @@ $(function(e){
         add: function (e, data) {
 			//console.log(e,data);
 			//alert($('#video[name=video]').val());
+			/*
 			var err = '';
 			if ($('.video[name=title]').val() == '') {
 				err += "<br>Title";
@@ -46,6 +47,7 @@ $(function(e){
 				openVbox('modules/ajax/message.php?message='+err,300,100);
 				return false;
 			}
+			*/
 			
             var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48"'+
                 ' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
@@ -150,8 +152,8 @@ $(function(e){
 							*/
 							
 							//console.log(data.result);
-							$('#profile-avatar img').attr('src',data.result.mediumFilePath);
 							$('.avatar img').attr('src',data.result.smallFilePath);
+							$('#profile-avatar img').attr('src',data.result.mediumFilePath);
 							$('#fuzz').remove();
 							/*
 							

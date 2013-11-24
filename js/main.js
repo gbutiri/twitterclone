@@ -129,6 +129,8 @@ $(document).ready(function(){
 				notify(data);
 			}
 		});
+	}).on('click','#drop cta',function() {
+		$(document).find('#mainimage').trigger('click');
 	});
 	
 	var notify = function (message) {
