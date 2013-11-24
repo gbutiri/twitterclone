@@ -25,8 +25,8 @@ function verify() {
 
 function emailunverified() {
 	?>
-	<p>Your email is not verified. Please check your email and verify.</p>
-	<p>Click <a href="/notifications.php?action=verifyemailagain">here</a> to send a verification again.</p>
+	<p>Emailul dumneavoastra nu este verificat. Vă rugăm, căutați emailul pentru verificare.</p>
+	<p>Apăsați <a href="/notifications.php?action=verifyemailagain">aici</a> să trimiteți un email de verificare.</p>
 	<?php
 }
 
@@ -34,8 +34,8 @@ function verifyemailagain() {
 	
 	?>
 	<form method="post" action="/notifications.php?action=sendverifyemail">
-		Email or Username: <input name="signup-email" type="text">
-		<button>Send Verification</button>
+		Adresa de E-mail sau Nume de utilizator: <input name="signup-email" type="text">
+		<button>Trimiteți Verification</button>
 	</form>
 	<?php
 }
@@ -57,8 +57,8 @@ function sendverifyemail() {
 		
 		//$to = trim("MovieMaker713@gmail.com");
 		$to = $row['email'];
-		$subject = "Inregistrarea cu ceau.ro";
-		$message = 'Apasati <a href="'._SITE.'/botifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+		$subject = "Înregistrarea cu ceau.ro";
+		$message = 'Apăsați <a href="'._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiați linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca să verificați contul de pe <a href="'._SITE.'/">ceau.ro</a>';
 		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
 			'Reply-To: george@actingshowcase.com' . "\r\n" .
 			'MIME-Version: 1.0' . "\r\n" .
@@ -66,12 +66,12 @@ function sendverifyemail() {
 			'X-Mailer: PHP/' . phpversion();
 			
 		if (mail($to,$subject,$message,$headers)) {
-			echo "Email Verification has been sent!";
+			echo "Verificare de Email a fost trimisă!";
 		} else {
-			echo "Unable to send mail.";
+			echo "Emailul nu a fost putut trimis.";
 		}
 	} else {
-		echo "Username or Email does not exist in our database.";
+		echo "Numele de utilizator sau Emailul nu se află cu noi.";
 	}
 	verifyemailagain();
 }
