@@ -1,8 +1,9 @@
 <?php 
 include (_DOCROOT.'/includes/class.db.php');
 $strposlogin = strpos($_SERVER['SCRIPT_FILENAME'],'/login.php');
+$strposabout = strpos($_SERVER['SCRIPT_FILENAME'],'/about.php');
 
-if (_USERNAME == '' && $strposlogin === false) {
+if (_USERNAME == '' && $strposlogin === false && $strposabout === false) {
 	header('location: /login.php');
 }
 
