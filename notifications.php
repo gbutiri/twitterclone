@@ -10,7 +10,7 @@ $db->close();
 
 
 function verify() {
-	var_dump($_GET);
+	//var_dump($_GET);
 	$sql = "SELECT username, email FROM signup WHERE email = '".$_GET['email']."' AND verifytoken = '".$_GET['verifytoken']."'";
 	$res = mysql_query($sql);
 	$row = mysql_fetch_assoc($res);
