@@ -24,23 +24,23 @@ function verify() {
 }
 
 function emailunverified() {
-	include (_DOCROOT.'/includes/header.php')
+	include (_DOCROOT.'/includes/header.php');
 	?>
 	<p>Emailul dumneavoastra nu este verificat. Vă rugăm, căutați emailul pentru verificare.</p>
 	<p>Apăsați <a href="/notifications.php?action=verifyemailagain">aici</a> să trimiteți un email de verificare.</p>
 	<?php
-	include (_DOCROOT.'/includes/footer.php')
+	include (_DOCROOT.'/includes/footer.php');
 }
 
 function verifyemailagain() {
-	include (_DOCROOT.'/includes/header.php')
+	include (_DOCROOT.'/includes/header.php');
 	?>
 	<form method="post" action="/notifications.php?action=sendverifyemail">
 		Adresa de E-mail sau Nume de utilizator: <input name="signup-email" type="text">
 		<button>Trimiteți Verification</button>
 	</form>
 	<?php
-	include (_DOCROOT.'/includes/footer.php')
+	include (_DOCROOT.'/includes/footer.php');
 }
 
 function sendverifyemail() {
