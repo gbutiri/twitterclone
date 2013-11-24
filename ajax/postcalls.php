@@ -95,7 +95,7 @@ function loadmore() {
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
 	
-	$sql = "SELECT * FROM posts WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC LIMIT 10";
+	$sql = "SELECT s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC LIMIT 10";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
