@@ -22,7 +22,7 @@ function loadinitialmessages() {
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
 	
-	$sql = "SELECT * FROM posts ".$sql_where."  ORDER BY id DESC LIMIT 10";
+	$sql = "SELECT s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster ".$sql_where."  ORDER BY id DESC LIMIT 10";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
@@ -66,7 +66,7 @@ function getlatestposts() {
 	}
 
 	$lastId = $_GET['lastid'];
-	$sql = "SELECT * FROM posts WHERE id > ".$lastId." ".$sql_where." ORDER BY id DESC";
+	$sql = "SELECT s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster WHERE id > ".$lastId." ".$sql_where." ORDER BY id DESC";
 	$res = mysql_query($sql);
 	ob_start();
 	

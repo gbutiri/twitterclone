@@ -104,6 +104,7 @@ a:hover {
 /* The tweet area */
 #tweets {
 	font-size: 14px;
+	clear: both;
 }
 #tweets li {
 	padding: 5px;
@@ -166,7 +167,6 @@ a:hover {
 	margin-right: 20px;
 	float: right;
 	font-weight: bold;
-	color: #333;
 }
 
 .main-billboard {
@@ -184,6 +184,10 @@ footer {
 	max-width: 600px;
 	width: 100%;
 	margin: 20px auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
 }
 
 #fuzz {
@@ -211,9 +215,6 @@ footer {
 	box-sizing: border-box;
 	font-size: 14px;
 }
-#notification div:before {
-	content: "- ";
-}
 #fuzz-close {
 	border: 3px solid #000;
 	border-radius: 20px;
@@ -227,4 +228,42 @@ footer {
 	text-align: center;
 	color: #000;
 	line-height: 20px;
+}
+
+h1 {
+}
+.avatar {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+.avatar img {
+	width: 50px;
+	height: 50px;
+}
+#profile-avatar {
+	width: 100px;
+	height: 100px;
+	position: relative;
+}
+#profile-avatar img {
+	width: 100px;
+	height: 100px;
+}
+#profile-avatar i {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	line-height: 100px;
+	text-align: center;
+	font-size: 50px;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+}
+#profile-avatar:hover i {
+	display: block;
 }

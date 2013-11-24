@@ -1,6 +1,7 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/class.db.php');
+include (_DOCROOT.'/includes/class.functions.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $db = new DB();
@@ -124,6 +125,10 @@ function trysignup() {
 			"message" => $err
 		);
 	} else {
+		
+		$f = new Functions();
+		$f->makeUserFolder(trim($_POST['signup-username']));
+	
 		$verifyToken = md5(time());
 		$sql="INSERT INTO signup (
 			`username`,

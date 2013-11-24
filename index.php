@@ -2,7 +2,7 @@
 include ('config.php');
 include (_DOCROOT.'/includes/pre-header.php');
 include (_DOCROOT.'/includes/header.php');
-include(_DOCROOT.'/templates/post-templates.php');
+include (_DOCROOT.'/templates/post-templates.php');
 ?>
 <form method="POST" id="write-form" action="/">
 	<div class="write-container">

@@ -121,6 +121,14 @@ $(document).ready(function(){
 			e.preventDefault();
 			$('#fuzz').remove();
 		}
+	}).on('click','#profile-avatar a',function(e){
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/profile.php?action=showimageuploader',
+			success: function(data) {
+				notify(data);
+			}
+		});
 	});
 	
 	var notify = function (message) {

@@ -1,0 +1,14 @@
+RewriteEngine on
+
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} \.(gif|jpg|jpeg|png)$ 
+RewriteRule photos/orig_([0-9]+).jpg /img/missing.png
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} \.(gif|jpg|jpeg|png)$ 
+RewriteRule photos/([0-9]+)_small.jpg /img/missing_small.png
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} \.(gif|jpg|jpeg|png)$ 
+RewriteRule photos/([0-9]+)_medium.jpg /img/missing_medium.png
