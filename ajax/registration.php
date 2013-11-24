@@ -71,7 +71,7 @@ function trysignup() {
 	'/^([*+!.&#$¦\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i' ; 
 
 	if (mysql_num_rows($res_un) > 0) {
-		$err.="<div>Numele nu e valabil. Folositi al nume.</div>";
+		$err.="<div>Numele nu e valabil. Folositi alt nume.</div>";
 	}
 	if ($row_em['emailcount'] > 0) {
 		$err.="<div>Emailul acesta deja exista. Folositi un email diferit.</div>";
