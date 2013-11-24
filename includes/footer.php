@@ -1,6 +1,6 @@
 </div>
 <footer>
-<a href="about.php">Despre noi</a>
+<a href="about.html">Despre noi</a>
 </footer>
 </body>
 </html>

@@ -164,7 +164,7 @@ function trysignup() {
 		$to = trim($_POST['signup-email']);
 		//$to = trim("MovieMaker713@gmail.com");
 		$subject = "Inregistrarea cu ceau.ro";
-		$message = 'Apasati <a href="'._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+		$message = 'Apasati <a href="'._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
 		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
             'Reply-To: george@actingshowcase.com' . "\r\n" .
             'MIME-Version: 1.0' . "\r\n" .

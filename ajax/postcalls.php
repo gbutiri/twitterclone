@@ -11,12 +11,18 @@ $db->close();
 function loadinitialmessages() {
 	include(_DOCROOT.'/templates/post-templates.php');
 	
-	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts ORDER BY id DESC";
+	$username = $_GET['username'];
+	$sql_where = "";
+	if ($username != '') {
+		$sql_where = " WHERE poster = '".$username."' ";
+	}
+	
+	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts ".$sql_where." ORDER BY id DESC";
 	$res_a = mysql_query($sql_a);
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
 	
-	$sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 10";
+	$sql = "SELECT * FROM posts ".$sql_where."  ORDER BY id DESC LIMIT 10";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
@@ -52,8 +58,15 @@ function makeapost() {
 
 function getlatestposts() {
 	include(_DOCROOT.'/templates/post-templates.php');
+
+	$username = $_GET['username'];
+	$sql_where = "";
+	if ($username != '') {
+		$sql_where = " AND poster = '".$username."' ";
+	}
+
 	$lastId = $_GET['lastid'];
-	$sql = "SELECT * FROM posts WHERE id > ".$lastId." ORDER BY id DESC";
+	$sql = "SELECT * FROM posts WHERE id > ".$lastId." ".$sql_where." ORDER BY id DESC";
 	$res = mysql_query($sql);
 	ob_start();
 	

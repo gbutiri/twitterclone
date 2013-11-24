@@ -94,7 +94,7 @@ $(document).ready(function(){
 			dataType: 'JSON',
 			success: function (data) {
 				if (data.error == false) {
-					window.location = '/login.php';
+					window.location = '/login.html';
 				}
 			}
 		});
@@ -123,8 +123,13 @@ $(document).ready(function(){
 	}
 	
 	var loadInitialMessages = function () {
+		var $username = $('#tweets').attr('data-username');
+		if (typeof($username) === 'undefined') {
+			$username = '';
+		}
+		//console.log($username);
 		$.ajax({
-			url:'/ajax/postcalls.php?action=loadinitialmessages&timezone='+objLocalZoneBit,
+			url:'/ajax/postcalls.php?action=loadinitialmessages&username='+$username+'&timezone='+objLocalZoneBit,
 			type:'GET',
 			dataType:'JSON',
 			success:function(data) {
@@ -142,13 +147,19 @@ $(document).ready(function(){
 			}
 		});
 	}
-	if ($('#tweets').length > 0 && $('#write-area').length > 0) {
+	if ($('#tweets').length > 0) {
 		loadInitialMessages();
 	}
 	
 	var k;
 	var loadLatestMessages = function () {
 		var $latestMessage = $(document).find('#tweets li').first();
+		
+		var $username = $('#tweets').attr('data-username');
+		if (typeof($username) === 'undefined') {
+			$username = '';
+		}
+		
 		if ($latestMessage[0]) {
 			$lastId = $latestMessage[0].id.replace('post_','');
 		} else {
@@ -156,7 +167,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url:'/ajax/postcalls.php?action=getlatestposts&lastid='+$lastId+'&timezone='+objLocalZoneBit,
+			url:'/ajax/postcalls.php?action=getlatestposts&username='+$username+'&lastid='+$lastId+'&timezone='+objLocalZoneBit,
 			type:'GET',
 			dataType:'JSON',
 			success:function(data) {
@@ -176,7 +187,7 @@ $(document).ready(function(){
 			siteclock();
 		},2000);
 	}
-	if ($('#tweets').length > 0 && $('#write-area').length > 0) {
+	if ($('#tweets').length > 0) {
 		siteclock();
 	}
 	

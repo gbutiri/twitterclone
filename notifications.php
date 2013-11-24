@@ -27,7 +27,7 @@ function emailunverified() {
 	include (_DOCROOT.'/includes/header.php');
 	?>
 	<p>Emailul dumneavoastra nu este verificat. Vă rugăm, căutați emailul pentru verificare.</p>
-	<p>Apăsați <a href="/notifications.php?action=verifyemailagain">aici</a> să trimiteți un email de verificare.</p>
+	<p>Apăsați <a href="/notifications.html?action=verifyemailagain">aici</a> să trimiteți un email de verificare.</p>
 	<?php
 	include (_DOCROOT.'/includes/footer.php');
 }
@@ -35,7 +35,7 @@ function emailunverified() {
 function verifyemailagain() {
 	include (_DOCROOT.'/includes/header.php');
 	?>
-	<form method="post" action="/notifications.php?action=sendverifyemail">
+	<form method="post" action="/notifications.html?action=sendverifyemail">
 		Adresa de E-mail sau Nume de utilizator: <input name="signup-email" type="text">
 		<button>Trimiteți Verification</button>
 	</form>
@@ -61,7 +61,7 @@ function sendverifyemail() {
 		//$to = trim("MovieMaker713@gmail.com");
 		$to = $row['email'];
 		$subject = "Înregistrarea cu ceau.ro";
-		$message = 'Apăsați <a href="'._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiați linkul acesta '._SITE.'/notifications.php?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca să verificați contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+		$message = 'Apăsați <a href="'._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiați linkul acesta '._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca să verificați contul de pe <a href="'._SITE.'/">ceau.ro</a>';
 		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
 			'Reply-To: george@actingshowcase.com' . "\r\n" .
 			'MIME-Version: 1.0' . "\r\n" .

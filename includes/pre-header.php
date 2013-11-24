@@ -4,7 +4,7 @@ $strposlogin = strpos($_SERVER['SCRIPT_FILENAME'],'/login.php');
 $strposabout = strpos($_SERVER['SCRIPT_FILENAME'],'/about.php');
 
 if (_USERNAME == '' && $strposlogin === false && $strposabout === false) {
-	header('location: /login.php');
+	header('location: /login.html');
 }
 
 define ('_TITLE',"ceau.ro");
@@ -19,7 +19,7 @@ $row_ev = mysql_fetch_assoc($res_ev);
 
 if ($row_ev['usercount'] > 0) {
 	if ($row_ev['emailverified'] == 0) {
-		header('location: /notifications.php?action=emailunverified');
+		header('location: /notifications.html?action=emailunverified');
 	}
 }
 
