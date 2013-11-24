@@ -20,7 +20,14 @@ $(document).ready(function(){
 	}).on('click','#post-button',function(e){
 		e.preventDefault();
 		var $writearea = $('#write-area');
-		if ($writearea.val() != $writearea.attr('place-holder')) {
+		//console.log($writearea.val());
+		if ($writearea.val() == $writearea.attr('place-holder') || $writearea.val().trim() == '') {
+			//console.log('invalid');
+			$writearea.val('');
+			$writearea.blur();
+			autosize($writearea);
+		} else {
+			//console.log('valid');
 			var $val = $('#write-area').serialize();
 			$writearea.val('');
 			autosize($writearea);
@@ -31,14 +38,15 @@ $(document).ready(function(){
 				data: $val,
 				success: function(data) {
 					//console.log(data);
-					$writearea.val($writearea.attr('place-holder'));
+					$writearea.val('');
+					$writearea.blur();
 				}
 			});
 		}
 	}).on('keyup','#write-area',function(e) {
 		if (e.keyCode == 13) {
-			$('#post-button').trigger('click');
 			$('#write-area').blur();
+			$('#post-button').trigger('click');
 		}
 		if ($('#write-area').val().length > 140) {
 			$('#write-area').val($('#write-area').val().substr(0,140));
