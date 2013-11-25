@@ -12,14 +12,14 @@ $db = new DB();
 $db->open();
 
 // verify email verification
-$sql_ev = "SELECT COUNT(*) AS usercount, emailverified FROM signup WHERE username = '"._USERNAME."'";
+$sql_ev = "SELECT COUNT(*) AS usercount, email, emailverified FROM signup WHERE username = '"._USERNAME."'";
 $res_ev = mysql_query($sql_ev);
 //var_dump(mysql_num_rows($res_ev));
 $row_ev = mysql_fetch_assoc($res_ev);
 
 if ($row_ev['usercount'] > 0) {
 	if ($row_ev['emailverified'] == 0) {
-		header('location: /notifications.html?action=emailunverified');
+		header('location: /notifications.html?action=emailunverified&email='.$row_ev['email']);
 	}
 }
 

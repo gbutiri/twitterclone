@@ -329,3 +329,9 @@ form {
 	font-size: 12px;
 	color: #aaa;
 }
+
+.like-bar {
+	float: left;
+	font-size: 10px;
+	font-weight: 300;
+}

@@ -194,4 +194,19 @@ Class Functions {
 			return $output;
 		}
 	}
+	function getLike($post_id) {
+		$sql = "SELECT COUNT(*) AS ilike FROM likes 
+				WHERE post_id = ".$post_id." 
+				AND username = '"._USERNAME."'";
+		$res = mysql_query($sql);
+		$row = mysql_fetch_assoc($res);
+		return $row['ilike'];
+	}
+	function getLikes($post_id) {
+		$sql = "SELECT COUNT(*) AS likes FROM likes 
+				WHERE post_id = ".$post_id;
+		$res = mysql_query($sql);
+		$row = mysql_fetch_assoc($res);
+		return $row['likes'];
+	}
 }

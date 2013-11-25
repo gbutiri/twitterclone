@@ -53,4 +53,27 @@ function savefield() {
 	));
 }
 
+function like() {
+	$f = new Functions();
+	$like = $_GET['like'];
+	$post_id = $_GET['postid'];
+	$likeval = 0;
+	if ($like == 'like') {
+		$sql = "REPLACE INTO likes (post_id,username) 
+			VALUES (".$post_id.",'"._USERNAME."')";
+		$likeval = 1;
+	} else {
+		$sql = "DELETE FROM likes 
+				WHERE post_id = ".$post_id." 
+				AND username = '"._USERNAME."';";
+	}
+	$res = mysql_query($sql);
+	$likes = $f->getLikes($post_id);
+	echo json_encode(array(
+		"likes" => $likes,
+		"like" => $likeval,
+		"sql" => $sql
+	));
+}
+
 ?>

@@ -26,8 +26,8 @@ function verify() {
 function emailunverified() {
 	include (_DOCROOT.'/includes/header.php');
 	?>
-	<p>Emailul dumneavoastra nu este verificat. Vă rugăm, căutați emailul pentru verificare.</p>
-	<p>Apăsați <a href="/notifications.html?action=verifyemailagain">aici</a> să trimiteți un email de verificare.</p>
+	<p>Emailul dumneavoastra nu este verificat. Vă rugăm, căutați emailul dumneavoastra (<?php echo $_GET['email']; ?>) pentru verificare.</p>
+	<p>Daca nu găsiți email de la noi, apăsați <a href="/notifications.html?action=verifyemailagain">aici</a> să trimiteți un email de verificare incă o dată.</p>
 	<?php
 	include (_DOCROOT.'/includes/footer.php');
 }

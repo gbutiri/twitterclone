@@ -167,6 +167,28 @@ $(document).ready(function(){
 		$('#zipcode').val($zipval);
 		saveField($('#zipcode'));
 		$(document).find('#zipcode-results').remove();
+	}).on('click','#tweets .like-bar a',function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var $counter = $this.parent().find('.like-count');
+		var $postId = $this.attr('data-id');
+		var $like='like';
+		if ($this.hasClass('unlike-button')) {
+			$like='unlike';
+		}
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=like&postid='+$postId+'&like='+$like,
+			dataType: 'JSON',
+			success: function (data) {
+				$counter.html(data.likes);
+				$this.toggleClass('like-button unlike-button');
+				if (data.like) {
+					$this.html('Nu-mi place');
+				} else {
+					$this.html('Îmi place');
+				}
+			}
+		});
 	});
 	
 	var saveField = function($this) {
