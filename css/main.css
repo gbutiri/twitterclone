@@ -323,6 +323,7 @@ form {
 #zipcode-results a {
 	display: block;
 	cursor: pointer;
+	font-size: 12px;
 }
 #tweets .location {
 	font-size: 12px;

@@ -132,8 +132,6 @@ Class Functions {
 		$inZip = urlencode($inZip);
 		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$inZip."&sensor=true";
 		$zip_obj = file_get_contents($url);
-		
-		// echo ( $zip_obj ) ;
 		$zip_obj = json_decode($zip_obj);
 		
 		//var_dump($zip_obj);
@@ -177,6 +175,8 @@ Class Functions {
 			}
 			if ($echo) {
 				$output .= '<a href="#">'.$city.', '.$city2.', '.$state.' '.$zipcode.', '.$country.'</a>';
+				$output = str_replace(", , ",", ",$output);
+				$output = str_replace(" , ",", ",$output);
 			} elseif ($output === '') {
 				$output = array(
 					"city" => $city,
