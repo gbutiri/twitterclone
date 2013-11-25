@@ -293,11 +293,11 @@ $(document).ready(function(){
 			loadLatestMessages();
 			//console.log(newMessages,document.title,origTitle);
 			if (newMessages) {
-				if (document.title == origTitle) {
+				//if (document.title == origTitle) {
 					document.title = "("+numMessages+") Mesaje noi - ceau.ro";
-				} else {
-					document.title = origTitle;
-				}
+				//} else {
+				//	document.title = origTitle;
+				//}
 			} 
 			siteclock();
 
