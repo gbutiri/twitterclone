@@ -1,13 +1,13 @@
 <?php 
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/class.db.php');
+define('_TITLE','ceau.ro - Notifications');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $db = new DB();
 $db->open();
 call_user_func($action);
 $db->close();
-
 
 function verify() {
 	//var_dump($_GET);
@@ -32,12 +32,13 @@ function emailunverified() {
 	include (_DOCROOT.'/includes/footer.php');
 }
 
-function verifyemailagain() {
+function verifyemailagain($message = "") {
 	include (_DOCROOT.'/includes/header.php');
 	?>
+	<p><?php echo $message; ?></p>
 	<form method="post" action="/notifications.html?action=sendverifyemail">
 		Adresa de E-mail sau Nume de utilizator: <input name="signup-email" type="text">
-		<button>Trimiteți Verification</button>
+		<button>Trimiteți Verificare</button>
 	</form>
 	<?php
 	include (_DOCROOT.'/includes/footer.php');
@@ -69,13 +70,13 @@ function sendverifyemail() {
 			'X-Mailer: PHP/' . phpversion();
 			
 		if (mail($to,$subject,$message,$headers)) {
-			echo "Verificare de Email a fost trimisă!";
+			$message = "Verificare de Email a fost trimisă!";
 		} else {
-			echo "Emailul nu a fost putut trimis.";
+			$message = "Emailul nu a fost putut trimis.";
 		}
 	} else {
-		echo "Numele de utilizator sau Emailul nu se află cu noi.";
+		$message = "Numele de utilizator sau Emailul nu se află cu noi.";
 	}
-	verifyemailagain();
+	verifyemailagain($message);
 }
 ?>
