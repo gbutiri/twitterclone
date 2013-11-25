@@ -43,7 +43,8 @@ function savefield() {
 	$latlong = $f->getLatLong(trim($_POST['location']));
 	$sql = "UPDATE signup SET `location` = '".$_POST['location']."',
 			`lat` = ".$latlong['lat'].",
-			`long` = ".$latlong['long'].";";
+			`long` = ".$latlong['long']."
+			WHERE username = '"._USERNAME."';";
 	
 	mysql_query($sql);
 	echo json_encode(array(
