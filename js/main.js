@@ -1,6 +1,9 @@
 var objLocalZone = new Date();
 var servertime = 6;
 var objLocalZoneBit = (parseInt(objLocalZone.toString().split(" ")[5].replace("GMT",""))/100)+servertime;
+var newMessages = false;
+var origTitle = "ceau.ro - conectați-vă cu prieteni Români!";
+var numMessages = 0;
 // testing for Romania timezone.
 //	objLocalZoneBit = "+2";
 
@@ -189,6 +192,11 @@ $(document).ready(function(){
 				}
 			}
 		});
+	}).on('click','body,document,html',function(e) {
+		//console.log('focused');
+		newMessages = false;
+		document.title = origTitle;
+		numMessages = 0;
 	});
 	
 	var saveField = function($this) {
@@ -267,6 +275,10 @@ $(document).ready(function(){
 			dataType:'JSON',
 			success:function(data) {
 				$('#tweets').prepend(data.messages);
+				if (data.messages != '') {
+					newMessages = true;
+					numMessages += data.count;
+				}
 			},
 			error: function() {
 				notify('<div>Ceva s-a intamplat. Va rugam sa incercati din nou. <a href="/">Reveniti!</a></div>');
@@ -279,7 +291,16 @@ $(document).ready(function(){
 		clearTimeout(k);
 		k = setTimeout(function(){
 			loadLatestMessages();
+			//console.log(newMessages,document.title,origTitle);
+			if (newMessages) {
+				if (document.title == origTitle) {
+					document.title = "("+numMessages+") Mesaje noi - ceau.ro";
+				} else {
+					document.title = origTitle;
+				}
+			} 
 			siteclock();
+
 		},2000);
 	}
 	if ($('#tweets').length > 0) {

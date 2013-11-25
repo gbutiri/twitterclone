@@ -68,6 +68,7 @@ function getlatestposts() {
 	$lastId = $_GET['lastid'];
 	$sql = "SELECT s.location, s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster WHERE id > ".$lastId." ".$sql_where." ORDER BY id DESC";
 	$res = mysql_query($sql);
+	$numMessages = mysql_num_rows($res);
 	ob_start();
 	
 	while ($row = mysql_fetch_assoc($res)) {
@@ -76,7 +77,8 @@ function getlatestposts() {
 	$messages = ob_get_contents();
 	ob_end_clean();
 	echo json_encode(array(
-		'messages' => $messages
+		'messages' => $messages,
+		'count' => $numMessages
 	));
 }
 
