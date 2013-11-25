@@ -324,3 +324,7 @@ form {
 	display: block;
 	cursor: pointer;
 }
+#tweets .location {
+	font-size: 12px;
+	color: #aaa;
+}
