@@ -124,14 +124,65 @@ $(document).ready(function(){
 	}).on('click','#profile-avatar a',function(e){
 		e.preventDefault();
 		$.ajax({
-			url: '/ajax/profile.php?action=showimageuploader',
+			url: '/ajax/profile-calls.php?action=showimageuploader',
 			success: function(data) {
 				notify(data);
 			}
 		});
 	}).on('click','#drop cta',function() {
 		$(document).find('#mainimage').trigger('click');
+	}).on('focus','#profile-form .autosave',function(e){
+		var $this = $(this);
+		if ($this.val() == $this.attr('place-holder')) {
+			$this.val('');
+		}
+		$this.addClass('active');
+	}).on('blur','#profile-form .autosave',function(e){
+		var $this = $(this);
+		if ($this.val() == '') {
+			$this.val($this.attr('place-holder'));
+			$this.removeClass('active');
+		}
+	}).on('keyup','#zipcode',function() {
+		var $this = $(this);
+		if ($this.val().length > 2) {
+			// show the zip code results
+			$.ajax({
+				url: '/ajax/profile-calls.php?action=getzipcode&zipcode='+$this.val().trim(),
+				dataType: 'JSON',
+				success: function (data) {
+					$(document).find('#zipcode-results').remove();
+					$this.after('<div id="zipcode-results">&nbsp;</div>');
+					$(document).find('#zipcode-results').html(data.locationvalue);
+				}
+			});
+		}
+	}).on('click','#zipcode-results a',function(e){
+		var $this = $(this);
+		e.preventDefault();
+		var $zipval = $this.html();
+		if ($this.html() == 'REMOVE') {
+			$zipval = '';
+		}
+		$('#zipcode').val($zipval);
+		saveField($('#zipcode'));
+		$(document).find('#zipcode-results').remove();
 	});
+	
+	var saveField = function($this) {
+		var $form = $this.closest('form');
+		var $url = $this.closest('form').attr('action');
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=savefield',
+			type: 'POST',
+			dataType: 'JSON',
+			data: $form.serialize(),
+			success: function(data) {
+				console.log(data);
+			}
+		});
+		//console.log($url);
+	}
 	
 	var notify = function (message) {
 		if ($('#fuzz').length == 0) {

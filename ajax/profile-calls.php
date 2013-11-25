@@ -1,6 +1,7 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/pre-header.php');
+include (_DOCROOT.'/includes/class.functions.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $db = new DB();
@@ -30,6 +31,25 @@ function showimageuploader() {
 	</div>
 	<script src="/js/mini-upload/script.js"></script>
 	<?php
+}
+
+function getzipcode() {
+	$f = new Functions();
+	$f->getZipInfo($_GET['zipcode']);
+}
+
+function savefield() {
+	$f = new Functions();
+	$latlong = $f->getLatLong(trim($_POST['location']));
+	$sql = "UPDATE signup SET `location` = '".$_POST['location']."',
+			`lat` = ".$latlong['lat'].",
+			`long` = ".$latlong['long'].";";
+	
+	mysql_query($sql);
+	echo json_encode(array(
+		"data" => $_POST,
+		"sql" => $sql
+	));
 }
 
 ?>

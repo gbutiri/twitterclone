@@ -7,7 +7,7 @@ if (_USERNAME == '' && $strposlogin === false && $strposabout === false) {
 	header('location: /login.html');
 }
 
-define ('_TITLE',"ceau.ro");
+define ('_TITLE',"ceau.ro - conectați-vă cu prieteni Români!");
 $db = new DB();
 $db->open();
 

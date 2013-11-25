@@ -113,4 +113,85 @@ Class Functions {
 			}
 		}
 	}
+	function getLatLong($inZip) {
+		$inZip = urlencode($inZip);
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$inZip."&sensor=true";
+		$zip_obj = file_get_contents($url);
+		$zip_obj = json_decode($zip_obj);
+		
+		//var_dump($zip_obj);
+		
+		$Latitude = $zip_obj->results[0]->geometry->location->lat;
+		$Longitude = $zip_obj->results[0]->geometry->location->lng;
+		return $latlong = array(
+			"lat" => $Latitude,
+			"long" => $Longitude
+		);
+	}
+	function getZipInfo($inZip, $echo = true) {
+		$inZip = urlencode($inZip);
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$inZip."&sensor=true";
+		$zip_obj = file_get_contents($url);
+		
+		// echo ( $zip_obj ) ;
+		$zip_obj = json_decode($zip_obj);
+		
+		//var_dump($zip_obj);
+		$output = '';
+		
+		foreach ($zip_obj->results as $zips) {
+			$zipcode="";
+			$city="";
+			$city2="";
+			$state="";
+			$country="";
+			
+			foreach ($zips->address_components as $add_comp) {
+				// var_dump ($add_comp);
+				switch ($add_comp->types[0]) {
+					case "postal_code":
+						$zipcode = $add_comp->long_name;
+						// var_dump("postcode: ".$zipcode);
+						break;
+					case "locality":
+						$city = $add_comp->long_name;
+						// var_dump("city: ".$city);
+						break;
+					case "administrative_area_level_2":
+						$city2 = $add_comp->long_name;
+						// var_dump("city2: ".$city2);
+						break;
+					case "administrative_area_level_1":
+						$state = $add_comp->long_name;
+						// var_dump("state: ".$state);
+						$state_abbr = $add_comp->short_name;
+						// var_dump("state abbr: ".$state_abbr);
+						break;
+					case "country":
+						$country = $add_comp->long_name;
+						// var_dump("country: ".$country);
+						$country_abbr = $add_comp->short_name;
+						// var_dump("country abbr: ".$country_abbr);
+						break;
+				}
+			}
+			if ($echo) {
+				$output .= '<a href="#">'.$city.', '.$city2.', '.$state.' '.$zipcode.', '.$country.'</a>';
+			} elseif ($output === '') {
+				$output = array(
+					"city" => $city,
+					"state" => $state,
+					"zip" => $zipcode,
+					"country" => $country
+				);
+			}
+		}
+		if ($echo) {
+			echo json_encode(array(
+				"locationvalue" => $output
+			));
+		} else {
+			return $output;
+		}
+	}
 }

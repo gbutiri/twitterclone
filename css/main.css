@@ -231,6 +231,7 @@ footer {
 }
 
 h1 {
+	margin-bottom: 0;
 }
 .avatar {
 	float: left;
@@ -292,4 +293,34 @@ h1 {
 	left: 0;
 	cursor: pointer;
 	width: 100%;
+}
+form {
+	position: relative;
+}
+.autosave {
+	border: 1px solid #ccc;
+	padding: 5px;
+	border-radius: 5px;
+	color: #ccc;
+}
+.autosave.active {
+	color: #333;
+}
+#profile-form {
+	float: left;
+}
+#zipcode {
+	width: 300px;
+}
+#zipcode-results {
+	position: absolute;
+	top: 30px;
+	left: 10px;
+	border: 1px solid #333;
+	background: #fff;
+	padding: 10px;
+}
+#zipcode-results a {
+	display: block;
+	cursor: pointer;
 }
