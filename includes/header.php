@@ -20,7 +20,8 @@
 <nav>
 	<a class="logo" href="/">ceau<span>.ro</span></a>
 	<?php if (_USERNAME != '') { ?>
-	<a id="logout-link" href="/logout">Ieșire</a>
+	<a class="logo" href="/map.html">harta</a>
+	<a id="logout-link" href="/logout">ieșire</a>
 	<?php } ?>
 	<a href="/<?php echo _USERNAME; ?>" class="username"><?php echo _USERNAME; ?></a>
 </nav>

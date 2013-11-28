@@ -2,8 +2,9 @@
 include (_DOCROOT.'/includes/class.db.php');
 $strposlogin = strpos($_SERVER['SCRIPT_FILENAME'],'/login.php');
 $strposabout = strpos($_SERVER['SCRIPT_FILENAME'],'/about.php');
+$strposmap = strpos($_SERVER['SCRIPT_FILENAME'],'/map.php');
 
-if (_USERNAME == '' && $strposlogin === false && $strposabout === false) {
+if (_USERNAME == '' && $strposlogin === false && $strposabout === false && $strposmap === false) {
 	header('location: /login.html');
 }
 

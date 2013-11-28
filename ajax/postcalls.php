@@ -1,6 +1,7 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/pre-header.php');
+include (_DOCROOT.'/includes/class.functions.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $db = new DB();
