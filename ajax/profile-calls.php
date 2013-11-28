@@ -99,7 +99,7 @@ function showimagecropper() {
 			
 			var resizeBox = function() {
 				
-				if (height > winH) {
+				//if (height > winH) {
 					console.log(winH, winW, width, height);
 					
 					$(document).find("#notification .videobox").css({'height':'100%','width':'auto'});
@@ -119,9 +119,9 @@ function showimagecropper() {
 					$(document).find("#notification .jcrop-tracker").css({'height':resizedH,'width':resizedW});
 					$(document).find("#notification .jcrop-holder").css({'height':resizedH,'width':resizedW});
 					$(document).find("#notification .jcrop-holder img").css({'height':resizedH,'width':resizedW});
-				} else {
-					$("#notification").css({"top" : ( ( (winH - height) / 2)) + "px"});
-				}
+				//} else {
+				//	$("#notification").css({"top" : ( ( (winH - height) / 2)) + "px"});
+				//}
 			}
 			
 			$('#notification').animate({
