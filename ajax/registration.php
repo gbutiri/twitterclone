@@ -131,9 +131,9 @@ function trysignup() {
 	
 		$emailverified = 0;
 		$verifyToken = md5(time());
-		if (_EMAILVERIFY) {
+		if (_EMAILVERIFY === false) {
 			$emailverified = 1;
-			verifyToken = '';
+			$verifyToken = '';
 		}
 		$sql="INSERT INTO signup (
 			`username`,
@@ -173,25 +173,31 @@ function trysignup() {
 			setcookie("fbclone_salt","",time()-3600,'/');
 		}
 		
-		$to = trim($_POST['signup-email']);
-		//$to = trim("MovieMaker713@gmail.com");
-		$subject = "Inregistrarea cu ceau.ro";
-		$message = 'Apasati <a href="'._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
-		$headers  = 'From: george@ceau.ro' . "\r\n" .
-            'Reply-To: george@ceau.ro' . "\r\n" .
-            'MIME-Version: 1.0' . "\r\n" .
-            'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-			
-		if (mail($to,$subject,$message,$headers)) {
+		if (_EMAILVERIFY) {
+		
+			$to = trim($_POST['signup-email']);
+			//$to = trim("MovieMaker713@gmail.com");
+			$subject = "Inregistrarea cu ceau.ro";
+			$message = 'Apasati <a href="'._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiati linkul acesta '._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca sa verificati contul de pe <a href="'._SITE.'/">ceau.ro</a>';
+			$headers  = 'From: george@ceau.ro' . "\r\n" .
+				'Reply-To: george@ceau.ro' . "\r\n" .
+				'MIME-Version: 1.0' . "\r\n" .
+				'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+			if (mail($to,$subject,$message,$headers)) {
+				$retArray = array(
+					"error" => false
+				);
+			} else {
+				echo "Unable to send mail.";
+				$retArray = array(
+					"error" => true,
+					"message" => "Unable to send mail"
+				);
+			}
+		} else {
 			$retArray = array(
 				"error" => false
-			);
-		} else {
-			echo "Unable to send mail.";
-			$retArray = array(
-				"error" => true,
-				"message" => "Unable to send mail"
 			);
 		}
 
