@@ -1,6 +1,7 @@
 <?php 
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/pre-header.php');
+include (_DOCROOT.'/includes/class.functions.php');
 include (_DOCROOT.'/templates/post-templates.php');
 
 $fn = new Functions();

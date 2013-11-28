@@ -154,6 +154,7 @@ $(function(e){
 							//console.log(data.result);
 							$('.avatar img').attr('src',data.result.smallFilePath);
 							$('#profile-avatar img').attr('src',data.result.mediumFilePath);
+							$('.image-actions').attr('data-imageid',data.result.image);
 							$('#fuzz').remove();
 							/*
 							

@@ -76,6 +76,7 @@ Class Functions {
 					
 					$src_ratio = $src_w / $src_h;
 					$dst_ratio = $dst_w / $dst_h;
+					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h);
 					
 					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
 					$src_image = imagecreatefromjpeg($absPhotoFile);
@@ -85,16 +86,16 @@ Class Functions {
 					$dst_y = 0;
 					if ($src_ratio > $dst_ratio) {
 						$shrinkRatio = $dst_h / $src_h ;
-						$dst_w = $src_w*$shrinkRatio;
+						$dst_w = $imageSize[1]; //$src_w*$shrinkRatio;
 						$diffOffset = (($dst_w-$imageSize[1])/2);
 						$dst_x = -$diffOffset;
 					} elseif ($src_ratio < $dst_ratio) {
 						$shrinkRatio = $dst_w / $src_w ;
-						$dst_h = $src_h*$shrinkRatio;
+						$dst_h = $imageSize[2]; //$src_h*$shrinkRatio;
 						$diffOffset = (($dst_h-$imageSize[2])/2);
 						$dst_y = -$diffOffset;
 					}
-
+					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h,$shrinkRatio);
 					// dst_ variables can be re-set to the post variables passed in.
 					
 					$src_x = 0;
@@ -108,6 +109,7 @@ Class Functions {
 						$src_h=$_POST['h'];
 					}
 					imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+					//var_dump($_POST,$dst_x,$dst_y,$dst_w,$dst_h);
 					imagejpeg($dst_image, $newPhotoFile, 75);
 				}
 			}
