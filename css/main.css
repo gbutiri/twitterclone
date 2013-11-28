@@ -281,7 +281,7 @@ h1 {
 	font-size: 25px;
 }
 #profile-avatar .image-actions .fa-crop {
-	display: none;
+	/*display: none;*/
 }
 #profile-avatar a:hover i {
 	display: block;

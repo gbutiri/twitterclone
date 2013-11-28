@@ -83,7 +83,7 @@ function showimagecropper() {
 				<input type="hidden" id="w" name="w" />
 				<input type="hidden" id="h" name="h" />
 				<input type="hidden" id="frmUsername" name="frmUsername" value="<?php echo _USERNAME; ?>" />
-				<input type="hidden" id="img" name="img" value="<?php echo $g_img; ?>" />
+				<input type="hidden" id="img" name="img" value="<?php echo $img; ?>" />
 				<input type="submit" value="Crop Image" class="cta cta-1 btn-large btn-inverse btn-cropimage" />
 			</form>
 		</div>
@@ -106,10 +106,15 @@ function showimagecropper() {
 					$(document).find("#notification img#target").css({'height':winH-60,'width':'auto'});
 					$(document).find("#notification").css({"height":winH - 60,"top":0});
 					var origW = parseInt($(document).find("#notification img").attr('width'));
+					console.log("origW",origW);
 					var origH = parseInt($(document).find("#notification img").attr('height'));
 					var resizedW = $(document).find("#notification img").width()-60;
-					var resizedH = $(document).find("#notification img").height()-60;
+					console.log("resizedW",resizedW);
+					if (resizedW > 270) {
+						resizedW = 270;
+					}
 					imgRatio = resizedW / origW;
+					var resizedH = origH * imgRatio;
 					console.log(imgRatio, resizedW, origW, origH, resizedH);
 					$(document).find("#notification .jcrop-tracker").css({'height':resizedH,'width':resizedW});
 					$(document).find("#notification .jcrop-holder").css({'height':resizedH,'width':resizedW});
@@ -120,7 +125,7 @@ function showimagecropper() {
 			}
 			
 			$('#notification').animate({
-				"top" : "0px",
+				"top" : "0px"
 				//"left" : ( ( (winW - width) / 2)) + "px"
 			},'fast',function(){
 				resizeBox();
@@ -132,25 +137,15 @@ function showimagecropper() {
 
 function savecroppedimages() {
 	$f = new Functions();
-	$img = isset($_POST['img']) ? $_POST['img'] : '';
-	$imgPath = $img;
-	$imgId = $img;
-	$imgId = explode("_",$imgId);
-	$imgId = explode(".",$imgId[1]);
-	$imgId = $imgId[0];
+	$imgid = isset($_GET['imgid']) ? $_GET['imgid'] : '';
 	$imageSizes = $f->imageSizes;
-	$f->resizeHeadshot($imgId,$imageSizes);
+	$f->resizeHeadshot($imgid,$imageSizes);
 	
 	
-	$retVal = array(
-		"error" => false,
-		"imageId" => $imgId,
-		"msg" => "Your picture has been cropped."
-	);
-	echo json_encode($retVal);
-	//$fn->resizeHeadshot($photonum,$imageSizes);
-	//var_dump($imgId);
-	//var_dump($_POST);
+	echo json_encode(array(
+		'smallFilePath' => $f->userLink(_USERNAME).'/photos/'.$imgid.'_small.jpg',
+		'mediumFilePath' => $f->userLink(_USERNAME).'/photos/'.$imgid.'_medium.jpg'
+	));
 	exit(0);
 }
 

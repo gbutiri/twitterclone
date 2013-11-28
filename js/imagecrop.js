@@ -50,30 +50,17 @@ jQuery(function($){
 	$('.btn-cropimage').on('click',function(e) {
 		e.preventDefault();
 		$formdata = $('#preview-pane form').serialize();
-		var $username = $('#frmUsername').val();
-		var $imgval = $('#img').val();
+		var $imgid = $('#img').val();
 		$.ajax({
-			url: '/modules/ajax/show_photo.php?un='+$username+'&img='+$imgval,
+			url: '/ajax/profile-calls.php?action=savecroppedimages&imgid='+$imgid,
 			type: 'POST',
 			dataType: 'JSON',
 			data: 'img='+imgIn+'&'+$formdata,
 			success: function(data) {
-				//console.log(data);
-				/*myphoto_medium_1373872227*/
-				var hsSrc = $imgval;
-				//console.log(hsSrc);
-				var src = hsSrc.replace('orig_','medium_');
-				var srcL = hsSrc.replace('orig_','large_');
-				if (src) {
-					$('#myphoto_medium_'+data.imageId+' img').attr('src',src+'?'+Math.random());
-					$currentHeadshotImg = $('#edit-image-container img').attr('data-id');
-					//console.log($currentHeadshotImg,parseInt(data.imageId));
-					if (parseInt($currentHeadshotImg) == parseInt(data.imageId)) {
-						$('.headshot_img img').attr('src',srcL+'?'+Math.random());
-					}
-					//$('.headshot_img img').attr('src',hsSrc+'?'+Math.random());
-					closeVbox();
-				}
+				var randomh=Math.random();
+				$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
+				$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
+				$('#fuzz').remove();
 			}
 			
 		});

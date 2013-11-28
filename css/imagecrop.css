@@ -2,8 +2,8 @@
 	display: inline-block;
 	position: absolute;
 	z-index: 2000;
-	top: 10px;
-	right: -290px;
+	bottom: -45px;
+	left: 0;
 	padding: 6px;
 	border: 1px rgba(0,0,0,.4) solid;
 	background-color: white;
@@ -25,4 +25,7 @@
 	width: 272px;
 	height: 340px;
 	overflow: hidden;
+}
+.jcrop-holder {
+	margin: auto;
 }
