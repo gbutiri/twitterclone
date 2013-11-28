@@ -59,7 +59,6 @@ function rotateimage() {
 }
 
 function showimagecropper() {
-	exit(0);
 	$f = new Functions();
 	$img = isset($_GET['img']) ? $_GET['img'] : '';
 	$imgSize = getimagesize($f->userFolder(_USERNAME).'/photos/orig_'.$img.'.jpg');

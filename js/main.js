@@ -136,7 +136,7 @@ $(document).ready(function(){
 		var $this = $(this);
 		var $imageid = $(this).parent().attr('data-imageid');
 		e.preventDefault();
-		/*
+		
 		if ($this.hasClass('fa-crop')) {
 			$.ajax({
 				url: '/ajax/profile-calls.php?action=showimagecropper&img='+$imageid,
@@ -145,7 +145,7 @@ $(document).ready(function(){
 				}
 			});
 		}
-		*/
+		
 		var randomh=Math.random();
 		if ($this.hasClass('fa-rotate-right')) {
 			$.ajax({
