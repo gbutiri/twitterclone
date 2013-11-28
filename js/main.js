@@ -132,6 +132,43 @@ $(document).ready(function(){
 				notify(data);
 			}
 		});
+	}).on('click','#profile-avatar .image-actions i',function(e){
+		var $this = $(this);
+		var $imageid = $(this).parent().attr('data-imageid');
+		e.preventDefault();
+		/*
+		if ($this.hasClass('fa-crop')) {
+			$.ajax({
+				url: '/ajax/profile-calls.php?action=showimagecropper&img='+$imageid,
+				success: function(data) {
+					notify(data);
+				}
+			});
+		}
+		*/
+		var randomh=Math.random();
+		if ($this.hasClass('fa-rotate-right')) {
+			$.ajax({
+				url: '/ajax/profile-calls.php?action=rotateimage&img='+$imageid+'&deg=-90',
+				dataType: 'JSON',
+				success: function(data) {
+					$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
+					$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
+					$('#fuzz').remove();
+				}
+			});
+		}
+		if ($this.hasClass('fa-rotate-left')) {
+			$.ajax({
+				url: '/ajax/profile-calls.php?action=rotateimage&img='+$imageid+'&deg=90',
+				dataType: 'JSON',
+				success: function(data) {
+					$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
+					$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
+					$('#fuzz').remove();
+				}
+			});
+		}
 	}).on('click','#drop cta',function() {
 		$(document).find('#mainimage').trigger('click');
 	}).on('focus','#profile-form .autosave',function(e){
@@ -198,6 +235,7 @@ $(document).ready(function(){
 		document.title = origTitle;
 		numMessages = 0;
 	});
+	
 	
 	var saveField = function($this) {
 		var $form = $this.closest('form');

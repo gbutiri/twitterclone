@@ -14,8 +14,15 @@ $f = new Functions();
 	<?php if ($profile_un == _USERNAME) { ?>
 		<a href="#">
 			<i class="fa fa-camera"></i>
+			<?php if (is_file($f->userFolder($profile_un).'/photos/'.$row['mainimgid'].'_medium.jpg')) { ?>
+			<?php } ?>
 			<img src="<?php echo $f->userLink($profile_un); ?>/photos/<?php echo $row['mainimgid']; ?>_medium.jpg" />
 		</a>
+		<div class="image-actions" data-imageid="<?php echo $row['mainimgid']; ?>">
+			<i class="fa fa-crop"></i>
+			<i class="fa fa-rotate-left"></i>
+			<i class="fa fa-rotate-right"></i>
+		</div>
 	<?php } else { ?>
 		<img src="<?php echo $f->userLink($profile_un); ?>/photos/<?php echo $row['mainimgid']; ?>_medium.jpg" />
 	<?php } ?>

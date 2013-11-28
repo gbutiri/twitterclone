@@ -245,19 +245,22 @@ h1 {
 }
 #profile-avatar {
 	width: 100px;
-	height: 100px;
+	height: auto;
 	position: relative;
+}
+#profile-avatar a {
+	cursor: default;
+	display: block;
 }
 #profile-avatar img {
 	width: 100px;
 	height: 100px;
 }
-#profile-avatar i {
+#profile-avatar a i {
+	cursor: pointer;
 	display: none;
 	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
+	height: 100px;
 	width: 100%;
 	line-height: 100px;
 	text-align: center;
@@ -265,7 +268,22 @@ h1 {
 	background-color: rgba(0,0,0,0.5);
 	color: #fff;
 }
-#profile-avatar:hover i {
+#profile-avatar .fa-camera {
+	top: 0;
+	left: 0;
+}
+#profile-avatar .image-actions {
+	overflow: hidden;
+}
+#profile-avatar .image-actions i {
+	display: inline-block;
+	cursor: pointer;
+	font-size: 25px;
+}
+#profile-avatar .image-actions .fa-crop {
+	display: none;
+}
+#profile-avatar a:hover i {
 	display: block;
 }
 .drophere {
