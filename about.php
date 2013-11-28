@@ -7,7 +7,7 @@ include (_DOCROOT.'/includes/header.php');
 Despre ceau.ro
 </h1>
 <p>
-Am inceput websiteul acesta pentru a a ajuta Romani sa se re-conecteze.
+Am inceput websiteul acesta pentru a cupla Romani.
 </p>
 <p>
 Cautat-ti niste prieteni.

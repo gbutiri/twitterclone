@@ -38,11 +38,15 @@ function showMap () {
 	while ($row = mysql_fetch_assoc($res)) {
 		$imglink = $f->userLink($row['username']).'/photos/'.$row['mainimgid'].'_small.jpg';
 		//var_dump($row);
+		$profilelink = '<img class="map-card-image" src="'.$imglink.'" />';
+		if (_USERNAME != '') {
+			$profilelink = '<a href="/'.$row['username'].'" class="map-card-image"><img src="'.$imglink.'" /></a>';
+		}
 		$tmpData = array(
 				"username" => $row['username'],
 				"latitude" => $row['lat'],
 				"longitude" => $row['long'],
-				"img" => '<img class="map-card-image" src="'.$imglink.'" />',
+				"img" => $profilelink,
 				"location" => $row['location']
 		);
 		array_push($data["stores"],$tmpData);
