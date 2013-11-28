@@ -246,7 +246,7 @@ $(document).ready(function(){
 			dataType: 'JSON',
 			data: $form.serialize(),
 			success: function(data) {
-				console.log(data);
+				//console.log(data);
 			}
 		});
 		//console.log($url);
