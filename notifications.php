@@ -65,8 +65,8 @@ function sendverifyemail() {
 		$to = $row['email'];
 		$subject = "Înregistrarea cu ceau.ro";
 		$message = 'Apăsați <a href="'._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.'">aici</a> sau copiați linkul acesta '._SITE.'/notifications.html?action=verify&email='.$to.'&verifytoken='.$verifyToken.' ca să verificați contul de pe <a href="'._SITE.'/">ceau.ro</a>';
-		$headers  = 'From: george@actingshowcase.com' . "\r\n" .
-			'Reply-To: george@actingshowcase.com' . "\r\n" .
+		$headers  = 'From: george@ceau.ro' . "\r\n" .
+			'Reply-To: george@ceau.ro' . "\r\n" .
 			'MIME-Version: 1.0' . "\r\n" .
 			'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
 			'X-Mailer: PHP/' . phpversion();

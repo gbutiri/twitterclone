@@ -129,7 +129,12 @@ function trysignup() {
 		$f = new Functions();
 		$f->makeUserFolder(trim($_POST['signup-username']));
 	
+		$emailverified = 0;
 		$verifyToken = md5(time());
+		if (_EMAILVERIFY) {
+			$emailverified = 1;
+			verifyToken = '';
+		}
 		$sql="INSERT INTO signup (
 			`username`,
 			`email`,
@@ -138,6 +143,7 @@ function trysignup() {
 			`lastlogin`,
 			`salt`,
 			`token`,
+			`emailverified`,
 			`verifytoken`
 		) VALUES (
 			'".trim($_POST['signup-username'])."',
@@ -147,6 +153,7 @@ function trysignup() {
 			'".date("Y-m-d H:i:s")."',
 			'".$salt."',
 			'".$token."',
+			'".$emailverified."',
 			'".$verifyToken."'
 		)";
 		//echo($sql);
