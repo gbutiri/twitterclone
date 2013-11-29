@@ -43,7 +43,7 @@ function trylogin() {
 			setcookie("fbclone_token","",time()-3600,'/');
 			setcookie("fbclone_salt","",time()-3600,'/');
 		}
-		$sql="UPDATE signup SET lastlogin = ".date("Y-m-d H:i:s").", token='".$token."', salt='".$salt."' WHERE username = '"._USERNAME."'";
+		$sql="UPDATE signup SET lastlogin = ".date("Y-m-d H:i:s").", token='".$token."', salt='".$salt."' WHERE username = '".$row_un['username']."'";
 		mysql_query($sql);
 		$retArray = array(
 			'error' => false,
