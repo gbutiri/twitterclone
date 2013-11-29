@@ -397,6 +397,8 @@ form {
 	color: #fff;
 	padding: 0 10px;
 	border-radius: 10px;
+	position: relative;
+	bottom: 5px;
 }
 .follow:hover, .unfollow:hover {
 	color: #fff;
