@@ -8,13 +8,13 @@ var numMessages = 0;
 //	objLocalZoneBit = "+2";
 
 $(document).ready(function(){
-	$(document).on('focus','#write-area',function(e){
+	$(document).on('focus','#write-area, #write-area2',function(e){
 		var $this = $(this);
 		if ($this.val() == $this.attr('place-holder')) {
 			$this.val('');
 		}
 		$this.addClass('active');
-	}).on('blur','#write-area',function(e){
+	}).on('blur','#write-area, #write-area2',function(e){
 		var $this = $(this);
 		if ($this.val() == '') {
 			$this.val($this.attr('place-holder'));
@@ -46,13 +46,14 @@ $(document).ready(function(){
 				}
 			});
 		}
-	}).on('keyup','#write-area',function(e) {
+	}).on('keyup','#write-area, #write-area2',function(e) {
+		var $this = $(this);
 		if (e.keyCode == 13) {
-			$('#write-area').blur();
+			$this.blur();
 			$('#post-button').trigger('click');
 		}
-		if ($('#write-area').val().length > 140) {
-			$('#write-area').val($('#write-area').val().substr(0,140));
+		if ($this.val().length > 140) {
+			$this.val($this.val().substr(0,140));
 		}
 	}).on('click','#load-more',function (e) {
 		var $firstMessage = $(document).find('#tweets li').last();
@@ -249,6 +250,18 @@ $(document).ready(function(){
 				// TODO - convert follow button into following. hover over = unfollow.
 			}
 		});
+	}).on('click','#postimage',function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=showimageuploader&posttype=post',
+			success: function(data) {
+				notify(data);
+				$(document).find('.autosize').css('overflow', 'hidden').on('keyup',function(e) {
+					var $this = $(this);
+					autosize($this);
+				});
+			}
+		});
 	});
 	
 	
@@ -360,7 +373,7 @@ $(document).ready(function(){
 		siteclock();
 	}
 	
-	$('.autosize').css('overflow', 'hidden').on('keyup',function(e) {
+	$(document).find('.autosize').css('overflow', 'hidden').on('keyup',function(e) {
 		var $this = $(this);
 		autosize($this);
 	});

@@ -31,6 +31,10 @@ Class Functions {
 		if (!is_dir(_DOCROOT."/users/".$letterfolder."/".$username."/vthumbs")) {
 			mkdir(_DOCROOT."/users/".$letterfolder."/".$username."/vthumbs", 0777);
 		}
+		// MAKE post photos DIRECTORY
+		if (!is_dir(_DOCROOT."/users/".$letterfolder."/".$username."/posts")) {
+			mkdir(_DOCROOT."/users/".$letterfolder."/".$username."/posts", 0777);
+		}
 	}
 
 	function userFolder($username) {
@@ -47,7 +51,11 @@ Class Functions {
 		array('small',50,50),
 		array('medium',100,100)
 	);
-	function resizeHeadshot($photonum, $sizes = array(),$username = '') {
+	var $postSizes = array(
+		array('small',50,50),
+		array('medium',500,0)
+	);
+	function resizeHeadshot($photonum, $sizes = array(),$username = '',$post=false) {
 		//require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
 		$fn = new Functions();
 		
@@ -59,8 +67,10 @@ Class Functions {
 		}
 		
 		
-		
 		$photoFolder = $userfolder.'/photos/';
+		if ($post) {
+			$photoFolder = $userfolder.'/posts/';
+		}
 		//var_dump($photoFolder);
 		//var_dump('is_dir($photoFolder)',is_dir($photoFolder),$photoFolder);
 		if (is_dir($photoFolder)) {
@@ -68,13 +78,24 @@ Class Functions {
 			if (is_file($absPhotoFile)) {
 				list($src_w, $src_h) = getimagesize($absPhotoFile);
 				foreach($imageSizes as $imageSize) {
+					$src_ratio = $src_w / $src_h;
+					
 					//var_dump($photonum,$imageSize,'<br>');
 					$dst_w = $imageSize[1];
 					$dst_h = $imageSize[2];
+					if ($imageSize[2] == 0) {
+						$shrinkRatio = $dst_w / $src_w ;
+						$imageSize[2] = $src_h * $shrinkRatio;
+						$dst_h = $imageSize[2];
+					}
+					if ($imageSize[1] == 0) {
+						$shrinkRatio = $dst_h / $src_h ;
+						$imageSize[1] = $src_w * $shrinkRatio;
+						$dst_w = $imageSize[1];
+					}
 					$new_name = $imageSize[0];
 					$newPhotoFile = $photoFolder.'/'.$photonum.'_'.$new_name.'.jpg';
 					
-					$src_ratio = $src_w / $src_h;
 					$dst_ratio = $dst_w / $dst_h;
 					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h);
 					
@@ -84,16 +105,18 @@ Class Functions {
 					// this is to place the image in the center.
 					$dst_x = 0;
 					$dst_y = 0;
-					if ($src_ratio > $dst_ratio) {
-						$shrinkRatio = $dst_h / $src_h ;
-						$dst_w = $imageSize[1]; //$src_w*$shrinkRatio;
-						$diffOffset = (($dst_w-$imageSize[1])/2);
-						$dst_x = -$diffOffset;
-					} elseif ($src_ratio < $dst_ratio) {
-						$shrinkRatio = $dst_w / $src_w ;
-						$dst_h = $imageSize[2]; //$src_h*$shrinkRatio;
-						$diffOffset = (($dst_h-$imageSize[2])/2);
-						$dst_y = -$diffOffset;
+					if (!$post) {
+						if ($src_ratio > $dst_ratio) {
+							$shrinkRatio = $dst_h / $src_h ;
+							$dst_w = $imageSize[1]; //$src_w*$shrinkRatio;
+							$diffOffset = (($dst_w-$imageSize[1])/2);
+							$dst_x = -$diffOffset;
+						} elseif ($src_ratio < $dst_ratio) {
+							$shrinkRatio = $dst_w / $src_w ;
+							$dst_h = $imageSize[2]; //$src_h*$shrinkRatio;
+							$diffOffset = (($dst_h-$imageSize[2])/2);
+							$dst_y = -$diffOffset;
+						}
 					}
 					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h,$shrinkRatio);
 					// dst_ variables can be re-set to the post variables passed in.

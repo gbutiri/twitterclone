@@ -11,15 +11,22 @@ $db->close();
 
 function showimageuploader() {
 	$filetype = 'image';
+	$post = isset($_GET['posttype']) ? $_GET['posttype'] : "profile";
 	?>
-	<h3>Upload a photo</h3>
+	<h3>Adaugati o poza.</h3>
 	<div>
-		<form id="upload" method="post" enctype="multipart/form-data" action="/ajax/upload-file.php?do=upload&type=<?php echo $filetype; ?>">
+		<form id="upload" method="post" enctype="multipart/form-data" action="/ajax/upload-file.php?action=uploadphoto<?php echo $post; ?>&type=<?php echo $filetype; ?>">
+			
+			<?php if ($post == 'post') {?>
+				<div class="write-container">
+					<textarea class="autosize" autocomplete="off" id="write-area2" name="writearea" place-holder="La ce va gândiți?">La ce va gândiți?</textarea>
+				</div>
+			<?php } ?>
 			
 			<div id="drop">
-				<span class="drophere">Drop Here</span>
+				<span class="drophere">Adaugati poza aici.</span>
 				<a class="cta cta-1">
-					Browse
+					Cautati
 					<input type="file" id="mainimage" name="mainimage" />
 				</a>
 			</div>
@@ -30,7 +37,6 @@ function showimageuploader() {
 		</form>
 	</div>
 	<script src="/js/mini-upload/script.js"></script>
-
 
 	<?php
 }

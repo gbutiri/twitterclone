@@ -10,6 +10,14 @@ function template_post($row) {
 		<div class="avatar"><img src="<?php echo $f->userLink($row['poster']); ?>/photos/<?php echo $row['mainimgid']; ?>_small.jpg" /></div>
 		<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> <?php if ($row['location'] != '') { ?><span class="location">( <?php echo $row['location']; ?> )</span><?php } ?>
 		<div class="content"><?php echo $row['details']; ?></div>
+		<?php 
+		if ($row['postimg'] != 0) {
+			$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg'
+			?>
+			<img src="<?php echo $imgLink; ?>" />
+			<?php
+		}
+		?>
 		
 		<div class="like-bar">
 			<?php if ($like == 0) { ?>

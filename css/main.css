@@ -52,11 +52,12 @@ a:hover {
 	padding: 10px;
 	border-radius: 10px;
 	margin: 10px 0 0;
+	position: relative;
 }
-#write-area {
+#write-area, #write-area2 {
 	border: 0;
 	font-size: 14px;
-	padding: 0;
+	padding: 0 30px 0 0;
 	display: block;
 	color: #ccc;
 	-webkit-box-sizing: border-box;
@@ -69,7 +70,12 @@ a:hover {
     -webkit-box-sizing: border-box;
 	overflow: hidden;
 }
-#write-area.active {
+#postimage {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+#write-area.active, #write-area2.active {
 	color: #333;
 }
 #load-more {
