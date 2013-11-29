@@ -1,6 +1,7 @@
 <?php 
 include ('config.php');
 include (_DOCROOT.'/includes/class.db.php');
+include (_DOCROOT.'/includes/class.functions.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'runinit';
 call_user_func($action);
@@ -61,5 +62,25 @@ function runinstall() {
 	
 }
 
+function fiximagenames() {
+	$db = new DB();
+	$db->open();
+	$f = new Functions();
+	$sql = "SELECT username, mainimgid 
+			FROM signup 
+			WHERE mainimgid != '' 
+				AND mainimgid != 0";
+	$res = mysql_query($sql);
+	while ($row = mysql_fetch_assoc($res)) {
+		$file = $f->userFolder($row['username']).'/photos/orig_'.$row['mainimgid'].'.jpg';
+		$newfile = $f->userFolder($row['username']).'/photos/'.$row['mainimgid'].'_orig.jpg';
+		// rename files.
+		if (is_file($file)) {
+			var_dump($file);
+			rename ($file,$newfile);
+		}
+	}
+	$db->close();
+}
 
 ?>

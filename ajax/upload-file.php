@@ -6,7 +6,7 @@ include (_DOCROOT.'/templates/post-templates.php');
 
 $fn = new Functions();
 $photonum = time();
-$savetofile = $fn->userFolder(_USERNAME).'/photos/orig_'.$photonum.".jpg";
+$savetofile = $fn->userFolder(_USERNAME).'/photos/'.$photonum."_orig.jpg";
 // die ($savetofile);
 // echo file_exists ( $savetofile );
 if (!file_exists ( $savetofile ) ) {

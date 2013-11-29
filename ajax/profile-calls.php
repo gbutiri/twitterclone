@@ -39,8 +39,8 @@ function rotateimage() {
 	$deg = isset($_GET['deg']) ? intval($_GET['deg']) : 0;
 	$imgid = isset($_GET['img']) ? intval($_GET['img']) : 0;
 	$f = new Functions();
-	$imgLink = $f->userLink(_USERNAME).'/photos/orig_'.$imgid.'.jpg' ;
-	$imgLoc = $f->userFolder(_USERNAME).'/photos/orig_'.$imgid.'.jpg' ;
+	$imgLink = $f->userLink(_USERNAME).'/photos/'.$imgid.'_orig.jpg' ;
+	$imgLoc = $f->userFolder(_USERNAME).'/photos/'.$imgid.'_orig.jpg' ;
 	
 	$source = imagecreatefromjpeg($imgLoc);
 	$rotate = imagerotate($source,$deg,0);
@@ -61,8 +61,8 @@ function rotateimage() {
 function showimagecropper() {
 	$f = new Functions();
 	$img = isset($_GET['img']) ? $_GET['img'] : '';
-	$imgSize = getimagesize($f->userFolder(_USERNAME).'/photos/orig_'.$img.'.jpg');
-	$g_img = $f->userLink(_USERNAME).'/photos/orig_'.$img.'.jpg' ;
+	$imgSize = getimagesize($f->userFolder(_USERNAME).'/photos/'.$img.'_orig.jpg');
+	$g_img = $f->userLink(_USERNAME).'/photos/'.$img.'_orig.jpg' ;
 	?>
 	<link rel="stylesheet" href="/css/jcrop/jquery.Jcrop.css" type="text/css" />
 	<link rel="stylesheet" href="/css/imagecrop.css" type="text/css" />

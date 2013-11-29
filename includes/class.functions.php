@@ -64,7 +64,7 @@ Class Functions {
 		//var_dump($photoFolder);
 		//var_dump('is_dir($photoFolder)',is_dir($photoFolder),$photoFolder);
 		if (is_dir($photoFolder)) {
-			$absPhotoFile = $photoFolder.'/orig_'.$photonum.'.jpg';
+			$absPhotoFile = $photoFolder.'/'.$photonum.'_orig.jpg';
 			if (is_file($absPhotoFile)) {
 				list($src_w, $src_h) = getimagesize($absPhotoFile);
 				foreach($imageSizes as $imageSize) {
