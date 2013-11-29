@@ -19,12 +19,20 @@ $f = new Functions();
 			<?php } ?>
 			<img src="<?php echo $f->userLink($profile_un); ?>/photos/<?php echo $row['mainimgid']; ?>_medium.jpg" />
 		</a>
-		<div class="image-actions" data-imageid="<?php echo $row['mainimgid']; ?>">
+		<?php 
+		$actions = '';
+		if ($row['mainimgid'] != '' || $row['mainimgid'] != 0) {
+			$actions = 'hidden';
+		}
+		?>
+		<div class="image-actions <?php echo $actions; ?>" data-imageid="<?php echo $row['mainimgid']; ?>">
 			<i class="fa fa-crop"></i>
 			<i class="fa fa-rotate-left"></i>
 			<i class="fa fa-rotate-right"></i>
 		</div>
-	<?php } else { ?>
+		<?php 
+	} else { 
+		?>
 		<img src="<?php echo $f->userLink($profile_un); ?>/photos/<?php echo $row['mainimgid']; ?>_medium.jpg" />
 	<?php } ?>
 </div>
@@ -39,7 +47,7 @@ if ($profile_un != _USERNAME) {
 	$row_count = mysql_fetch_assoc($res_count);
 	$followcount = $row_count['followcount'];
 	if ($followcount > 0) {
-		?><a class="unfollow" data-username="<?php echo $profile_un; ?>" href="#follow">nu urmați</a><?php 
+		?><a class="unfollow" data-username="<?php echo $profile_un; ?>" href="#follow"><span class="active">mă urmați</span><span class="hover">nu urmați</span></a><?php 
 	} else { 
 		?><a class="follow" data-username="<?php echo $profile_un; ?>" href="#follow">urmați-mă</a><?php 
 	}

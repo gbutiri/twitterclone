@@ -22,6 +22,9 @@ a {
 a:hover {
 	color: #3EA022;
 }
+.hidden {
+	display: none;
+}
 
 /* The general area */
 .autosize {
@@ -394,4 +397,20 @@ form {
 	color: #fff;
 	padding: 0 10px;
 	border-radius: 10px;
+}
+.follow:hover, .unfollow:hover {
+	color: #fff;
+	background: #666;
+}
+.unfollow .active {
+	display: block;
+}
+.unfollow .hover {
+	display: none;
+}
+.unfollow:hover .active {
+	display: none;
+}
+.unfollow:hover .hover {
+	display: block;
 }

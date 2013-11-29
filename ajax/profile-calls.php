@@ -187,8 +187,7 @@ function like() {
 	$likes = $f->getLikes($post_id);
 	echo json_encode(array(
 		"likes" => $likes,
-		"like" => $likeval,
-		"sql" => $sql
+		"like" => $likeval
 	));
 }
 
@@ -199,7 +198,7 @@ function follow() {
 	
 	echo json_encode(array(
 		"error" => false,
-		"replace" => "nu urmați"
+		"replace" => '<span class="active">mă urmați</span><span class="hover">nu urmați</span>'
 	));
 }
 function unfollow() {
