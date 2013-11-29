@@ -21,7 +21,7 @@ $f = new Functions();
 		</a>
 		<?php 
 		$actions = '';
-		if ($row['mainimgid'] != '' || $row['mainimgid'] != 0) {
+		if ($row['mainimgid'] == '' || $row['mainimgid'] == 0) {
 			$actions = 'hidden';
 		}
 		?>

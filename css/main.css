@@ -399,10 +399,18 @@ form {
 	border-radius: 10px;
 	position: relative;
 	bottom: 5px;
+	width: 100px;
+	text-align: center;
+}
+.follow {
+	background: #59B356;
 }
 .follow:hover, .unfollow:hover {
 	color: #fff;
 	background: #666;
+}
+.follow:hover {
+	background: #3EA022;
 }
 .unfollow .active {
 	display: block;

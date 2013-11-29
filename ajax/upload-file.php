@@ -50,23 +50,6 @@ if (!file_exists ( $savetofile ) ) {
 
 			$newheight = $height;
 			$newwidth = $width;
-			//echo( $newwidth." x ".$newheight);
-			/*
-			if ($width > $max_width || $height > $max_height) {
-				// image is too big. check which is too big
-				if ($width > $max_width) {
-					$newwidth = $max_width;
-					$newheight = ($newwidth/$width)*$height;
-				}
-				if ($newheight > $max_height) {
-					$newheight2 = $max_height;
-					$newwidth2 = ($newheight2/$newheight)*$newwidth;
-					$newheight = $newheight2;
-					$newwidth = $newwidth2;
-				}
-			}
-			*/
-
 			// Create temporary image file.
 			$tmp = imagecreatetruecolor($newwidth,$newheight);
 
