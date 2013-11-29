@@ -234,6 +234,32 @@ $(document).ready(function(){
 		newMessages = false;
 		document.title = origTitle;
 		numMessages = 0;
+	}).on('click','.follow',function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var $tofollow = $this.attr('data-username');
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=follow&tofollow='+$tofollow,
+			dataType: 'JSON',
+			success: function(data) {
+				$this.html(data.replace);
+				$this.toggleClass('follow unfollow');
+				// TODO - convert follow button into following. hover over = unfollow.
+			}
+		});
+	}).on('click','.unfollow',function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var $tofollow = $this.attr('data-username');
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=unfollow&tofollow='+$tofollow,
+			dataType: 'JSON',
+			success: function(data) {
+				$this.html(data.replace);
+				$this.toggleClass('follow unfollow');
+				// TODO - convert follow button into following. hover over = unfollow.
+			}
+		});
 	});
 	
 	

@@ -29,7 +29,20 @@ $f = new Functions();
 	<?php } ?>
 </div>
 <h1><?php echo $profile_un; ?></h1>
-
+<?php 
+$sql_count = "SELECT COUNT(*) AS followcount 
+		FROM follows 
+		WHERE `username` = '"._USERNAME."'
+			AND `isfollowing` = '".$profile_un."'";
+$res_count = mysql_query($sql_count);
+$row_count = mysql_fetch_assoc($res_count);
+$followcount = $row_count['followcount'];
+if ($followcount > 0) {
+?>
+<a class="unfollow" data-username="<?php echo $profile_un; ?>" href="#follow">nu urmați</a>
+<?php } else { ?>
+<a class="follow" data-username="<?php echo $profile_un; ?>" href="#follow">urmați-mă</a>
+<?php } ?>
 <div>
 	<?php if ($profile_un == _USERNAME) { ?>
 		<form autocomplete="off" id="profile-form" action="/ajax/profile-calls.php?action=saveprofilefield">

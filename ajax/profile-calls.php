@@ -192,4 +192,27 @@ function like() {
 	));
 }
 
+function follow() {
+	$tofollow = isset($_GET['tofollow']) ? trim($_GET['tofollow']) : '';
+	$sql = "REPLACE INTO follows (`username`,`isfollowing`) VALUES ('"._USERNAME."','".$tofollow."')";
+	$res = mysql_query($sql);
+	
+	echo json_encode(array(
+		"error" => false,
+		"replace" => "nu urmați"
+	));
+}
+function unfollow() {
+	$tofollow = isset($_GET['tofollow']) ? trim($_GET['tofollow']) : '';
+	$sql = "DELETE FROM follows 
+			WHERE `username` = '"._USERNAME."'
+			AND `isfollowing` = '".$tofollow."';";
+	$res = mysql_query($sql);
+	
+	echo json_encode(array(
+		"error" => false,
+		"replace" => "urmați-mă"
+	));
+}
+
 ?>
