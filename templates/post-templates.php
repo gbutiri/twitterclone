@@ -13,8 +13,12 @@ function template_post($row) {
 			<?php echo $row['details']; ?>
 			<?php 
 			if ($row['postimg'] != 0) {
-				$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg'
+				$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
+				$imgPath = $f->userFolder($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
+				
+				var_dump(exif_read_data($imgPath));
 				?>
+				
 				<div class="shadow-wrapper">
 					<div class="img-mask">
 						<img class="post-image" src="<?php echo $imgLink; ?>" />

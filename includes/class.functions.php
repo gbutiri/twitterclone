@@ -118,9 +118,9 @@ Class Functions {
 					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
 					$src_image = imagecreatefromjpeg($absPhotoFile);
 					
-					$handle = fopen("log.txt","w+");
-					fwrite($handle,var_export(exif_read_data($absPhotoFile),true));
-					fclose($handle);
+					//$handle = fopen("log.txt","w+");
+					//fwrite($handle,var_export(exif_read_data($absPhotoFile),true));
+					//fclose($handle);
 					//var_export(exif_read_data($absPhotoFile));
 					//var_dump($src_image);
 					

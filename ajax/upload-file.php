@@ -29,6 +29,8 @@ function uploadphotopost() {
 			"image_tmp"    	=> $_FILES["mainimage"]["tmp_name"],
 			"image_size"    => (int)$_FILES["mainimage"]["size"]
 		);
+		
+		
 		$valid_exts = array("jpg","jpeg","gif","png");
 		$filename = explode(".",strtolower(trim($postvars["image"])));
 		$ext = strtolower(pathinfo($fn->userFolder(_USERNAME).'/photos/'.$postvars["image"], PATHINFO_EXTENSION));
@@ -64,6 +66,11 @@ function uploadphotopost() {
 				imagedestroy($tmp);
 				
 				$imageSizes = $fn->postSizes;
+				
+		$handle = fopen("log.txt","w+");
+		//fwrite($handle,var_export($postvars["image_tmp"],true));
+		fwrite($handle,var_export(exif_read_data($filename),true));
+		fclose($handle);
 
 				$fn->resizeHeadshot($imgname,$imageSizes,'',$post=true);
 					
@@ -113,7 +120,12 @@ function uploadphotoprofile() {
 			"image_tmp"    	=> $_FILES["mainimage"]["tmp_name"],
 			"image_size"    => (int)$_FILES["mainimage"]["size"]
 		);
-
+		
+		//$handle = fopen("log.txt","w+");
+		//fwrite($handle,var_export($postvars,true));
+		//fwrite($handle,var_export(exif_read_data($absPhotoFile),true));
+		//fclose($handle);
+		
 		// Array of valid extensions.
 		$valid_exts = array("jpg","jpeg","gif","png");
 
