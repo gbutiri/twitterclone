@@ -19,7 +19,7 @@ function template_post($row) {
 					<div class="img-mask">
 						<img class="post-image" src="<?php echo $imgLink; ?>" />
 					</div>
-					<div class="bottom-shadow">&nbsp;</div>
+					<div class="bottom-shadow"><i class="fa fa-arrow-down"></i> Descoperiti <i class="fa fa-arrow-down"></i></div>
 				</div>
 				<?php
 			}

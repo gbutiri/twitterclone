@@ -66,10 +66,17 @@ function uploadphotopost() {
 				$imageSizes = $fn->postSizes;
 
 				$fn->resizeHeadshot($imgname,$imageSizes,'',$post=true);
+					
+					if (trim($_POST['writearea']) == 'La ce va gândiți?') {
+						$descr = '';
+					} else {
+						$descr = trim($_POST['writearea']);
+					}
+					
 					$sql = "INSERT INTO posts (
 								`details`,`dtm`,`poster`,`postimg`
 							) VALUES (
-								'".addslashes(trim($_POST['writearea']))."','".date("Y-m-d H:i:s")."','"._USERNAME."',".$imgname."
+								'".addslashes($descr)."','".date("Y-m-d H:i:s")."','"._USERNAME."',".$imgname."
 							)";
 							$res = mysql_query($sql);
 
