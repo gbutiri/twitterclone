@@ -66,8 +66,12 @@ $(document).ready(function(){
 		if (typeof($username) === 'undefined') {
 			$username = '';
 		}
+		var $type = $('#tweets').attr('data-type');
+		if (typeof($type) === 'undefined') {
+			$type = '';
+		}
 		$.ajax({
-			url: '/ajax/postcalls.php?action=loadmore&username='+$username+'&firstid='+$firstId+'&timezone='+objLocalZoneBit,
+			url: '/ajax/postcalls.php?action=loadmore&type='+$type+'&username='+$username+'&firstid='+$firstId+'&timezone='+objLocalZoneBit,
 			type: 'GET',
 			dataType:'JSON',
 			success:function(data) {
@@ -300,9 +304,13 @@ $(document).ready(function(){
 		if (typeof($username) === 'undefined') {
 			$username = '';
 		}
+		var $type = $('#tweets').attr('data-type');
+		if (typeof($type) === 'undefined') {
+			$type = '';
+		}
 		//console.log($username);
 		$.ajax({
-			url:'/ajax/postcalls.php?action=loadinitialmessages&username='+$username+'&timezone='+objLocalZoneBit,
+			url:'/ajax/postcalls.php?action=loadinitialmessages&type='+$type+'&username='+$username+'&timezone='+objLocalZoneBit,
 			type:'GET',
 			dataType:'JSON',
 			success:function(data) {
@@ -332,6 +340,10 @@ $(document).ready(function(){
 		if (typeof($username) === 'undefined') {
 			$username = '';
 		}
+		var $type = $('#tweets').attr('data-type');
+		if (typeof($type) === 'undefined') {
+			$type = '';
+		}
 		
 		if ($latestMessage[0]) {
 			$lastId = $latestMessage[0].id.replace('post_','');
@@ -340,7 +352,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url:'/ajax/postcalls.php?action=getlatestposts&username='+$username+'&lastid='+$lastId+'&timezone='+objLocalZoneBit,
+			url:'/ajax/postcalls.php?action=getlatestposts&type='+$type+'&username='+$username+'&lastid='+$lastId+'&timezone='+objLocalZoneBit,
 			type:'GET',
 			dataType:'JSON',
 			success:function(data) {

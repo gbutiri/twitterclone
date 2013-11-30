@@ -19,8 +19,15 @@ function loadinitialmessages() {
 	if ($username != '') {
 		$sql_where = " WHERE poster = '".$username."' ";
 	}
+	$type = $_GET['type'];
+	if ($type == 'follow') {
+		$sql_where = " LEFT JOIN follows f
+				ON f.isfollowing = p.poster
+			WHERE f.username = '"._USERNAME."'
+				OR p.poster = '"._USERNAME."'  ";
+	}
 	
-	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts ".$sql_where." ORDER BY id DESC";
+	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts p ".$sql_where." ORDER BY p.id DESC";
 	$res_a = mysql_query($sql_a);
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
@@ -38,7 +45,9 @@ function loadinitialmessages() {
 	echo json_encode(array(
 		'messages' => $messages,
 		'messagesleft' => $numMessages,
-		'nummore' => intval($numMore)
+		'nummore' => intval($numMore),
+		'$type' => $type,
+		//'$sql' => $sql
 	));
 }
 
@@ -63,13 +72,21 @@ function getlatestposts() {
 	include(_DOCROOT.'/templates/post-templates.php');
 
 	$username = $_GET['username'];
+	$sql_pre = "";
 	$sql_where = "";
 	if ($username != '') {
 		$sql_where = " AND poster = '".$username."' ";
 	}
+	$type = $_GET['type'];
+	if ($type == 'follow') {
+		$sql_pre = " LEFT JOIN follows f
+				ON f.isfollowing = p.poster";
+		$sql_where = "AND (f.username = '"._USERNAME."'
+				OR p.poster = '"._USERNAME."')  ";
+	}
 
 	$lastId = $_GET['lastid'];
-	$sql = "SELECT s.location, s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster WHERE id > ".$lastId." ".$sql_where." ORDER BY id DESC";
+	$sql = "SELECT s.location, s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster ".$sql_pre." WHERE p.id > ".$lastId." ".$sql_where." ORDER BY id DESC";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
@@ -81,7 +98,8 @@ function getlatestposts() {
 	ob_end_clean();
 	echo json_encode(array(
 		'messages' => $messages,
-		'count' => $numMessages
+		'count' => $numMessages,
+		//'$sql' => $sql
 	));
 }
 
@@ -91,16 +109,24 @@ function loadmore() {
 	
 	$username = $_GET['username'];
 	$sql_where = "";
+	$sql_pre = "";
 	if ($username != '') {
 		$sql_where = " AND poster = '".$username."' ";
 	}
+	$type = $_GET['type'];
+	if ($type == 'follow') {
+		$sql_pre = " LEFT JOIN follows f
+				ON f.isfollowing = p.poster";
+		$sql_where = "AND (f.username = '"._USERNAME."'
+				OR p.poster = '"._USERNAME."')  ";
+	}
 	
-	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC";
+	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts p ".$sql_pre." WHERE p.id < ".$firstId." ".$sql_where." ORDER BY id DESC";
 	$res_a = mysql_query($sql_a);
 	$row_a = mysql_fetch_assoc($res_a);
 	$numMore = $row_a['totalMessages'];
 	
-	$sql = "SELECT s.location, s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC LIMIT 10";
+	$sql = "SELECT s.location, s.mainimgid, p.* FROM posts p INNER JOIN signup s ON s.username = p.poster ".$sql_pre." WHERE id < ".$firstId." ".$sql_where." ORDER BY id DESC LIMIT 10";
 	$res = mysql_query($sql);
 	$numMessages = mysql_num_rows($res);
 	ob_start();
@@ -113,7 +139,8 @@ function loadmore() {
 	echo json_encode(array(
 		'messages' => $messages,
 		'messagesleft' => $numMessages,
-		'nummore' => intval($numMore)
+		'nummore' => intval($numMore),
+		'$sql' => $sql
 	));
 }
 

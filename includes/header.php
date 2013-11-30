@@ -21,6 +21,7 @@
 	<a class="logo" href="/">ceau<span>.ro</span></a>
 	<?php if (_USERNAME != '') { ?>
 	<a class="logo" href="/map.html">harta</a>
+	<a class="followers" href="/followers.html">urmaritii</a>
 	<a id="logout-link" href="/logout">ieșire</a>
 	<?php } ?>
 	<a href="/<?php echo _USERNAME; ?>" class="username"><?php echo _USERNAME; ?></a>
