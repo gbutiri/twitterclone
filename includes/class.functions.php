@@ -118,6 +118,12 @@ Class Functions {
 					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
 					$src_image = imagecreatefromjpeg($absPhotoFile);
 					
+					$handle = fopen("log.txt","w+");
+					fwrite($handle,var_export(exif_read_data($absPhotoFile),true));
+					fclose($handle);
+					//var_export(exif_read_data($absPhotoFile));
+					//var_dump($src_image);
+					
 					// this is to place the image in the center.
 					$dst_x = 0;
 					$dst_y = 0;
