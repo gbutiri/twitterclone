@@ -122,9 +122,15 @@ a:hover {
 	border-bottom: 1px solid #ddd;
 }
 #tweets li .post-image {
-	max-width: 500px;
+	max-width: 564px;
 	width: 100%;
 	margin-top: 10px;
+	/*margin-left: 60px;*/
+	border: 3px solid #fff;
+	box-shadow: 0 0 3px 0px #000;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 #tweets .poster {
 	font-weight: bold;
@@ -368,6 +374,7 @@ form {
 	float: left;
 	font-size: 10px;
 	font-weight: 300;
+	/*margin-left: 60px;*/
 }
 
 #map-container {
@@ -434,4 +441,30 @@ form {
 }
 .unfollow:hover .hover {
 	display: block;
+}
+.img-mask {
+	overflow: hidden;
+	height: 200px;
+	width: 100%;
+	padding: 3px;
+	cursor: pointer;
+	position: relative;
+}
+.full .img-mask {
+	height: 100%;
+}
+.bottom-shadow {
+	position: absolute;
+	bottom: 0;
+	background-image: url('/img/jagged-line.png');
+	height: 8px;
+	right: 0;
+	left: 0;
+}
+.shadow-wrapper {
+	position: relative;
+}
+.full .bottom-shadow {
+	bottom: 10px;
+	display: none;
 }

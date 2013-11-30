@@ -53,7 +53,7 @@ Class Functions {
 	);
 	var $postSizes = array(
 		array('small',50,50),
-		array('medium',500,0)
+		array('medium',564,0)
 	);
 	function resizeHeadshot($photonum, $sizes = array(),$username = '',$post=false) {
 		//require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');

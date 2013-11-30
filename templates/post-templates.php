@@ -15,8 +15,11 @@ function template_post($row) {
 			if ($row['postimg'] != 0) {
 				$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg'
 				?>
-				<div class="img-mask">
-					<img class="post-image" src="<?php echo $imgLink; ?>" />
+				<div class="shadow-wrapper">
+					<div class="img-mask">
+						<img class="post-image" src="<?php echo $imgLink; ?>" />
+					</div>
+					<div class="bottom-shadow">&nbsp;</div>
 				</div>
 				<?php
 			}

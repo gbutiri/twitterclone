@@ -262,6 +262,10 @@ $(document).ready(function(){
 				});
 			}
 		});
+	}).on('click','.shadow-wrapper',function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		$this.toggleClass('full');
 	});
 	
 	
