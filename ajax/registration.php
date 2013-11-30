@@ -23,7 +23,7 @@ function forgotpasssubmit() {
 				SET password = '".md5($newPass)."'
 				WHERE username = '".$email."' OR email = '".$email."'";
 		mysql_query($sql_u);
-		$to = $email;
+		$to = $row['email'];
 		//$to = trim("MovieMaker713@gmail.com");
 		$subject = "Parola uitata de la ceau.ro";
 		$message = 'Parola noua a dumneavoastra pentru contul <strong>'.$row['username'].'</strong> este: <strong>'.$newPass.'</strong>. Apasati <a href="'._SITE.'/">aici</a> sau megeti la '._SITE.' si conectati-va. <a href="'._SITE.'/">ceau.ro</a>';
