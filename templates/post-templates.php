@@ -33,7 +33,7 @@ function template_post($row) {
 		</div>
 		
 		<div class="time">
-			<?php echo strftime("%a, %d %b, %Y @ %H:%M %S",strtotime($row['dtm'].$timezone."hours")); ?>
+			<?php echo strftime("%A, %d %B, %Y @ %H:%M %S",strtotime($row['dtm'].$timezone."hours")); ?>
 		</div>
 	</li>
 	<?php
