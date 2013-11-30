@@ -17,9 +17,13 @@ function template_post($row) {
 				//$imgPath = $f->userFolder($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
 				
 				//var_dump(exif_read_data($imgPath));
+				if ($row['poster'] == _USERNAME) {
+					?>
+					<i class="fa fa-rotate-left rotate-image"></i>
+					<i class="fa fa-rotate-right rotate-image"></i>
+					<?php
+				}
 				?>
-				<i class="fa fa-rotate-left rotate-image"></i>
-				<i class="fa fa-rotate-right rotate-image"></i>
 				<div class="shadow-wrapper">
 					<div class="img-mask">
 						<img class="post-image" src="<?php echo $imgLink; ?>" />
