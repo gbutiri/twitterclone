@@ -26,10 +26,14 @@ if ($row_ev['usercount'] > 0) {
 }
 
 // check for cookie token and salt.
+//var_dump( isset($_COOKIE['fbclone_username']) && $_COOKIE['fbclone_username'] != "" );
 if (isset($_COOKIE['fbclone_username']) && $_COOKIE['fbclone_username'] != "") {
 	$sql = "SELECT salt, token FROM signup WHERE username = '".$_COOKIE['fbclone_username']."'";
 	$res = mysql_query($sql);
 	$row_login = mysql_fetch_assoc($res);
+	//var_dump($row_login);
+	//var_dump(isset($_COOKIE['fbclone_token']) && $_COOKIE['fbclone_token'] == $row_login['token'] && isset($_COOKIE['fbclone_salt']) && $_COOKIE['fbclone_salt'] == $row_login['salt']);
+	//exit(0);
 	if (isset($_COOKIE['fbclone_token']) && $_COOKIE['fbclone_token'] == $row_login['token'] && isset($_COOKIE['fbclone_salt']) && $_COOKIE['fbclone_salt'] == $row_login['salt']) {
 		$_SESSION['fbclone_username'] = $_COOKIE['fbclone_username'];
 		$sql="UPDATE signup SET lastlogin = ".date("Y-m-d H:i:s")." WHERE username = '".$_SESSION['fbclone_username']."'";

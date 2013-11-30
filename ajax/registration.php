@@ -95,19 +95,21 @@ function trylogin() {
 		$_SESSION['fbclone_token'] = $token;
 		$_SESSION['fbclone_salt'] = $salt;
 		if (isset($_POST['remember']) && $_POST['remember']) {
-			setcookie("fbclone_username",$row_un['username'],time()+(3600*24*365*10));
-			setcookie("fbclone_token",$token,time()+(3600*24*30));
-			setcookie("fbclone_salt",$salt,time()+(3600*24*30));
+			setcookie("fbclone_username",$row_un['username'],time()+(3600*24*365*10),'/');
+			setcookie("fbclone_token",$token,time()+(3600*24*365*10),'/');
+			setcookie("fbclone_salt",$salt,time()+(3600*24*365*10),'/');
+			//exit(0);
 		} else {
 			setcookie("fbclone_username","",time()-3600,'/');
 			setcookie("fbclone_token","",time()-3600,'/');
 			setcookie("fbclone_salt","",time()-3600,'/');
 		}
-		$sql="UPDATE signup SET lastlogin = ".date("Y-m-d H:i:s").", token='".$token."', salt='".$salt."' WHERE username = '".$row_un['username']."'";
+		$sql="UPDATE signup SET lastlogin = '".date("Y-m-d H:i:s")."', token='".$token."', salt='".$salt."' WHERE username = '".$row_un['username']."'";
 		mysql_query($sql);
 		$retArray = array(
 			'error' => false,
-			'message' => 'Username, email or password incorrect.'
+			'message' => 'Login succes.',
+			'sql' => $sql
 		);
 	}
 	

@@ -19,7 +19,7 @@ Conectați-vă cu prieteni Români!
 	<div><input type="text" name="signin-username" id="signin-username" /></div>
 	<label>Parolă:</label>
 	<div><input type="password" name="signin-password" id="signin-password" /></div>
-	<?php if (false) { ?>
+	<?php if (true) { ?>
 	<div>
 		<span><input type="checkbox" id="remember" name="remember" value="true" />Tine-ma minte</span>
 	</div>
