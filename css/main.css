@@ -449,6 +449,7 @@ form {
 	padding: 3px;
 	cursor: pointer;
 	position: relative;
+	clear: both;
 }
 .full .img-mask {
 	height: 100%;
