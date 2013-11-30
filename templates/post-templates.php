@@ -15,7 +15,9 @@ function template_post($row) {
 			if ($row['postimg'] != 0) {
 				$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg'
 				?>
-				<img class="post-image" src="<?php echo $imgLink; ?>" />
+				<div class="img-mask">
+					<img class="post-image" src="<?php echo $imgLink; ?>" />
+				</div>
 				<?php
 			}
 			?>
@@ -30,7 +32,9 @@ function template_post($row) {
 			(<span class="like-count"><?php echo $likes; ?></span>)
 		</div>
 		
-		<div class="time"><?php echo date("D, M jS @ g:i a",strtotime($row['dtm'].$timezone."hours")); ?></div>
+		<div class="time">
+			<?php echo strftime("%a, %d %b, %Y @ %H:%M %S",strtotime($row['dtm'].$timezone."hours")); ?>
+		</div>
 	</li>
 	<?php
 }

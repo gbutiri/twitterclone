@@ -1,4 +1,6 @@
 <?php
+setlocale(LC_TIME, array('ro.utf-8', 'ro_RO.UTF-8', 'ro_RO.utf-8', 'ro', 'ro_RO', 'ro_RO.ISO8859-2'));
+date_default_timezone_set('Europe/Bucharest'); 
 include ($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include (_DOCROOT.'/includes/pre-header.php');
 include (_DOCROOT.'/includes/class.functions.php');
