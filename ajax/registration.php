@@ -9,6 +9,66 @@ $db->open();
 call_user_func($action);
 $db->close();
 
+function forgotpasssubmit() {
+	$email = addslashes(trim($_GET['emailforgot']));
+	$sql = "SELECT email, username FROM signup 
+			WHERE username LIKE '".$email."'
+			OR email LIKE '".$email."'";
+	$res = mysql_query($sql);
+	
+	if (mysql_num_rows($res) > 0) {
+		$newPass = createRandomPassword();
+		$row = mysql_fetch_assoc($res);
+		$sql_u = "UPDATE signup 
+				SET password = '".md5($newPass)."'
+				WHERE username = '".$email."' OR email = '".$email."'";
+		mysql_query($sql_u);
+		$to = $email;
+		//$to = trim("MovieMaker713@gmail.com");
+		$subject = "Parola uitata de la ceau.ro";
+		$message = 'Parola noua a dumneavoastra pentru contul <strong>'.$row['username'].'</strong> este: <strong>'.$newPass.'</strong>. Apasati <a href="'._SITE.'/">aici</a> sau megeti la '._SITE.' si conectati-va. <a href="'._SITE.'/">ceau.ro</a>';
+		$headers  = 'From: george@ceau.ro' . "\r\n" .
+			'Reply-To: george@ceau.ro' . "\r\n" .
+			'MIME-Version: 1.0' . "\r\n" .
+			'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+		if (mail($to,$subject,$message,$headers)) {
+			$retArray = array(
+				"error" => false,
+				"message" => "Mesajul a fost trimis. Cautati-va cutia postala electronica (E-Mail)"
+			);
+		} else {
+			$retArray = array(
+				"error" => true,
+				"message" => "Unable to send mail."
+			);
+		}
+	} else {
+		// email or username not found
+		$retArray = array(
+			"error" => true,
+			"message" => "Adresa de Email sau numele de utilizator nu a fost gasit(a)."
+		);
+	}
+	echo json_encode($retArray);
+
+}
+
+function showforgotpass() {
+	?>
+	<form id="forgotpass">
+		<div>
+			<label>Emailul sau numele de utilizare:</label>
+			<input type="text" name="email-forgot" id="email-forgot" />
+		</div>
+		<div>
+			<button id="forgot-password-submit">trimite-ti</button>
+		</div>
+		<div id="forgot-messages"></div>
+	</form>
+	<?php
+}
+
 function trylogin() {
 
 	$username = $_POST['signin-username'];
@@ -231,20 +291,19 @@ function checkEmail($email, $strict = false) {
 	}
 }
 
-function checkPassword ($pwd) {
-	$error="";
-	if( strlen($pwd) < 6 ) {$error = "Password too short. Must be at least 6 characters.";}
-	elseif( strlen($pwd) > 20 ) {$error = "Password too long. Must be no longer than 20 characters.";}
-	elseif( !preg_match("#[0-9]+#", $pwd) ) {$error = "Password must include at least one number!";}
-	elseif( !preg_match("#[a-zA-Z]+#", $pwd) ) {$error = "Password must include at least one letter!";}
-	//elseif( !preg_match("#[a-z]+#", $pwd) ) {$error = "Password must include at least one lowercase letter!";}
-	//elseif( !preg_match("#[A-Z]+#", $pwd) ) {$error = "Password must include at least one uppercase letter!";}
-	//elseif( !preg_match("#\W+#", $pwd) ) {$error = "Password must include at least one symbol!";}
-	if($error!=""){
-		return $error;
-	} else {
-		return "";
+function createRandomPassword() { 
+	$chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!";
+	srand((double)microtime()*1000000);
+	$i = 0;
+	$pass = '' ;
+
+	while ($i <= 7) {
+		$num = rand() % strlen($chars);
+		$tmp = substr($chars, $num, 1);
+		$pass = $pass . $tmp;
+		$i++;
 	}
+	return $pass;
 }
 
 function checkUsername ($username) {

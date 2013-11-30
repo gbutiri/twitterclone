@@ -483,3 +483,7 @@ form {
 	bottom: 10px;
 	display: none;
 }
+#remember {
+	width: auto;
+	margin-right: 10px;
+}

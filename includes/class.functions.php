@@ -37,6 +37,22 @@ Class Functions {
 		}
 	}
 
+	function checkPassword ($pwd) {
+		$error="";
+		if( strlen($pwd) < 6 ) {$error = "Parola e prea scurta. Trebuie sa fie cel putin 6 cifre / litere.";}
+		elseif( strlen($pwd) > 20 ) {$error = "Parola e prea lunga. Limita e 20 de cifre / litere.";}
+		elseif( !preg_match("#[0-9]+#", $pwd) ) {$error = "Folositi cel putin o cifra pentru parola.";}
+		elseif( !preg_match("#[a-zA-Z]+#", $pwd) ) {$error = "Folositi cel putin o litera pentru parola.";}
+		//elseif( !preg_match("#[a-z]+#", $pwd) ) {$error = "Password must include at least one lowercase letter!";}
+		//elseif( !preg_match("#[A-Z]+#", $pwd) ) {$error = "Password must include at least one uppercase letter!";}
+		//elseif( !preg_match("#\W+#", $pwd) ) {$error = "Password must include at least one symbol!";}
+		if($error!=""){
+			return $error;
+		} else {
+			return "";
+		}
+	}
+
 	function userFolder($username) {
 		$letterfolder = strtolower(substr($username,0,1));
 		$folder = _DOCROOT."/users/".$letterfolder."/".$username;

@@ -270,6 +270,40 @@ $(document).ready(function(){
 		e.preventDefault();
 		var $this = $(this);
 		$this.toggleClass('full');
+	}).on('click','#forgot-password',function(e){
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/registration.php?action=showforgotpass',
+			success: function(data) {
+				notify(data);
+			}
+		});
+	}).on('click','#forgot-password-submit',function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/registration.php?action=forgotpasssubmit&emailforgot='+$(document).find('#email-forgot').val(),
+			dataType: 'JSON',
+			success: function(data) {
+				$(document).find('#forgot-messages').html(data.message);
+			}
+		});
+	}).on('click','#change-password',function(e){
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=showchangepass',
+			success: function(data) {
+				notify(data);
+			}
+		});
+	}).on('click','#change-password-submit',function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/profile-calls.php?action=changepasssubmit&currentpass='+$(document).find('#pass-current').val()+'&newpass='+$(document).find('#pass-new').val()+'',
+			dataType: 'JSON',
+			success: function(data) {
+				$(document).find('#change-messages').html(data.message);
+			}
+		});
 	});
 	
 	

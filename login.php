@@ -19,7 +19,15 @@ Conectați-vă cu prieteni Români!
 	<div><input type="text" name="signin-username" id="signin-username" /></div>
 	<label>Parolă:</label>
 	<div><input type="password" name="signin-password" id="signin-password" /></div>
+	<?php if (false) { ?>
+	<div>
+		<span><input type="checkbox" id="remember" name="remember" value="true" />Tine-ma minte</span>
+	</div>
+	<?php } ?>
 	<div><button id="signin-button" />Conectați-vă</button></div>
+	<div>
+		<a href="#" id="forgot-password">Mi-am uitat parola</a>
+	</div>
 </form>
 <form method="POST" id="signup-form" class="registration-forms" action="/ajax/registration.php?action=trysignup">
 	<label>E-mail:</label>

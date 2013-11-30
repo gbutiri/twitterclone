@@ -9,6 +9,57 @@ $db->open();
 call_user_func($action);
 $db->close();
 
+function showchangepass() {
+	?>
+	<form id="changepass">
+		<div>
+			<label>parola curenta</label>
+			<input type="password" name="pass-current" id="pass-current" />
+		</div>
+		<div>
+			<label>parola dorita</label>
+			<input type="password" name="pass-new" id="pass-new" />
+		</div>
+		<div>
+			<button id="change-password-submit">schimbati</button>
+		</div>
+		<div id="change-messages"></div>
+	</form>
+	<?php
+}
+
+function changepasssubmit() {
+	$f = new Functions();
+	$currentpass = addslashes(trim($_GET['currentpass']));
+	$newpass = addslashes(trim($_GET['newpass']));
+	$sql = "SELECT username FROM signup
+			WHERE username = '"._USERNAME."' 
+				AND password = '".md5($currentpass)."'";
+	$res = mysql_query($sql);
+	
+	$passCheck = $f->checkPassword($newpass);
+	if ($passCheck != '') {
+		$retArray = array(
+			"message" => $passCheck
+		);
+	} else {
+		if (mysql_num_rows($res) > 0) {
+			$sql_u = "UPDATE signup SET password = '".md5($newpass)."'
+					WHERE username = '"._USERNAME."' 
+						AND password = '".md5($currentpass)."'";
+			mysql_query($sql_u);
+			$retArray = array(
+				"message" => "Parola schimbata cu succes."
+			);
+		} else {
+			$retArray = array(
+				"message" => "Parola curenta e incorecta."
+			);
+		}
+	}
+	echo json_encode($retArray);
+}
+
 function showimageuploader() {
 	$filetype = 'image';
 	$post = isset($_GET['posttype']) ? $_GET['posttype'] : "profile";

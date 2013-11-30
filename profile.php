@@ -58,6 +58,7 @@ if ($profile_un != _USERNAME) {
 		<form autocomplete="off" id="profile-form" action="/ajax/profile-calls.php?action=saveprofilefield">
 			<input autocomplete="off" name="location" id="zipcode" type="text" data-fieldname="location" class="autosave <?php echo( ($row['location'] == '') ? '' : 'active'); ?>" place-holder="Localnicul" value="<?php echo( ($row['location'] == '') ? 'Localnicul' : $row['location']); ?>" />
 		</form>
+		<div><a href="#" id="change-password">schimbati parola</a></div>
 	<?php } else { ?>
 		<?php echo $row['location']; ?>
 	<?php } ?>
