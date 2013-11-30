@@ -9,16 +9,17 @@ function template_post($row) {
 	<li id="post_<?php echo $row['id']; ?>">
 		<div class="avatar"><img src="<?php echo $f->userLink($row['poster']); ?>/photos/<?php echo $row['mainimgid']; ?>_small.jpg" /></div>
 		<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> <?php if ($row['location'] != '') { ?><span class="location">( <?php echo $row['location']; ?> )</span><?php } ?>
-		<div class="content">
+		<div class="content" data-imageid="<?php echo $row['postimg']; ?>">
 			<?php echo $row['details']; ?>
 			<?php 
 			if ($row['postimg'] != 0) {
 				$imgLink = $f->userLink($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
-				$imgPath = $f->userFolder($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
+				//$imgPath = $f->userFolder($row['poster']).'/posts/'.$row['postimg'].'_medium.jpg';
 				
-				var_dump(exif_read_data($imgPath));
+				//var_dump(exif_read_data($imgPath));
 				?>
-				
+				<i class="fa fa-rotate-left rotate-image"></i>
+				<i class="fa fa-rotate-right rotate-image"></i>
 				<div class="shadow-wrapper">
 					<div class="img-mask">
 						<img class="post-image" src="<?php echo $imgLink; ?>" />

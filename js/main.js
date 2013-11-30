@@ -137,10 +137,15 @@ $(document).ready(function(){
 				notify(data);
 			}
 		});
-	}).on('click','#profile-avatar .image-actions i',function(e){
+	}).on('click','#profile-avatar .image-actions i, .rotate-image',function(e){
 		var $this = $(this);
 		var $imageid = $(this).parent().attr('data-imageid');
 		e.preventDefault();
+		var $imagetype = 'profile';
+		if ($this.hasClass('rotate-image')) {
+			$imagetype = 'post';
+		}
+		//console.log($this.hasClass('rotate-image'),$imagetype);
 		
 		if ($this.hasClass('fa-crop')) {
 			$.ajax({
@@ -154,23 +159,31 @@ $(document).ready(function(){
 		var randomh=Math.random();
 		if ($this.hasClass('fa-rotate-right')) {
 			$.ajax({
-				url: '/ajax/profile-calls.php?action=rotateimage&img='+$imageid+'&deg=-90',
+				url: '/ajax/profile-calls.php?action=rotateimage&imagetype='+$imagetype+'&img='+$imageid+'&deg=-90',
 				dataType: 'JSON',
 				success: function(data) {
-					$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
-					$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
-					$('#fuzz').remove();
+					if ($this.hasClass('rotate-image')) {
+						$this.parent().find('img').attr('src',data.mediumFilePath+'?x='+randomh);
+					} else {
+						$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
+						$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
+						$('#fuzz').remove();
+					}
 				}
 			});
 		}
 		if ($this.hasClass('fa-rotate-left')) {
 			$.ajax({
-				url: '/ajax/profile-calls.php?action=rotateimage&img='+$imageid+'&deg=90',
+				url: '/ajax/profile-calls.php?action=rotateimage&imagetype='+$imagetype+'&img='+$imageid+'&deg=90',
 				dataType: 'JSON',
 				success: function(data) {
-					$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
-					$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
-					$('#fuzz').remove();
+					if ($this.hasClass('rotate-image')) {
+						$this.parent().find('img').attr('src',data.mediumFilePath+'?x='+randomh);
+					} else {
+						$('.avatar img').attr('src',data.smallFilePath+'?x='+randomh);
+						$('#profile-avatar img').attr('src',data.mediumFilePath+'?x='+randomh);
+						$('#fuzz').remove();
+					}
 				}
 			});
 		}

@@ -67,10 +67,10 @@ function uploadphotopost() {
 				
 				$imageSizes = $fn->postSizes;
 				
-		$handle = fopen("log.txt","w+");
-		//fwrite($handle,var_export($postvars["image_tmp"],true));
-		fwrite($handle,var_export(exif_read_data($filename),true));
-		fclose($handle);
+				//$handle = fopen("log.txt","w+");
+				//fwrite($handle,var_export($postvars["image_tmp"],true));
+				//fwrite($handle,var_export(exif_read_data($filename),true));
+				//fclose($handle);
 
 				$fn->resizeHeadshot($imgname,$imageSizes,'',$post=true);
 					

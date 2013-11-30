@@ -95,23 +95,33 @@ function showimageuploader() {
 function rotateimage() {
 	$deg = isset($_GET['deg']) ? intval($_GET['deg']) : 0;
 	$imgid = isset($_GET['img']) ? intval($_GET['img']) : 0;
+	$imagetype = $_GET['imagetype'];
+	$location = 'photos';
 	$f = new Functions();
-	$imgLink = $f->userLink(_USERNAME).'/photos/'.$imgid.'_orig.jpg' ;
-	$imgLoc = $f->userFolder(_USERNAME).'/photos/'.$imgid.'_orig.jpg' ;
+	if ($imagetype == 'profile') {
+		$imageSizes = $f->imageSizes;
+		$location = 'photos';
+	} elseif ($imagetype == 'post') {
+		$imageSizes = $f->postSizes;
+		$location = 'posts';
+	}
+	$imgLink = $f->userLink(_USERNAME).'/'.$location.'/'.$imgid.'_orig.jpg' ;
+	$imgLoc = $f->userFolder(_USERNAME).'/'.$location.'/'.$imgid.'_orig.jpg' ;
 	
 	$source = imagecreatefromjpeg($imgLoc);
 	$rotate = imagerotate($source,$deg,0);
 	//file_put_contents($imgLoc,$rotate);
 	
 	imagejpeg($rotate,$imgLoc,75);
-	$imageSizes = $f->imageSizes;
-	$f->resizeHeadshot($imgid,$imageSizes);
+	
+	
+	$f->resizeHeadshot($imgid,$imageSizes,'',true);
 	imagedestroy($rotate);
 	imagedestroy($source);
 	//$retval = ;
 	echo json_encode(array(
-		'smallFilePath' => $f->userLink(_USERNAME).'/photos/'.$imgid.'_small.jpg',
-		'mediumFilePath' => $f->userLink(_USERNAME).'/photos/'.$imgid.'_medium.jpg'
+		'smallFilePath' => $f->userLink(_USERNAME).'/'.$location.'/'.$imgid.'_small.jpg',
+		'mediumFilePath' => $f->userLink(_USERNAME).'/'.$location.'/'.$imgid.'_medium.jpg'
 	));
 }
 
