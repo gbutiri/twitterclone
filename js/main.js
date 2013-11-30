@@ -129,7 +129,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			$('#fuzz').remove();
 		}
-	}).on('click','#profile-avatar a',function(e){
+	}).on('click','#profile-avatar .change-image',function(e){
 		e.preventDefault();
 		$.ajax({
 			url: '/ajax/profile-calls.php?action=showimageuploader',

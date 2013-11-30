@@ -13,7 +13,7 @@ $f = new Functions();
 ?>
 <div id="profile-avatar" class="avatar">
 	<?php if ($profile_un == _USERNAME) { ?>
-		<a href="#">
+		<a href="#" class="change-image">
 			<i class="fa fa-camera"></i>
 			<?php if (is_file($f->userFolder($profile_un).'/photos/'.$row['mainimgid'].'_medium.jpg')) { ?>
 			<?php } ?>
@@ -29,6 +29,7 @@ $f = new Functions();
 			<i class="fa fa-crop"></i>
 			<i class="fa fa-rotate-left"></i>
 			<i class="fa fa-rotate-right"></i>
+			<a href="#" id="change-password">schimbati parola</a>
 		</div>
 		<?php 
 	} else { 
@@ -58,7 +59,6 @@ if ($profile_un != _USERNAME) {
 		<form autocomplete="off" id="profile-form" action="/ajax/profile-calls.php?action=saveprofilefield">
 			<input autocomplete="off" name="location" id="zipcode" type="text" data-fieldname="location" class="autosave <?php echo( ($row['location'] == '') ? '' : 'active'); ?>" place-holder="Localnicul" value="<?php echo( ($row['location'] == '') ? 'Localnicul' : $row['location']); ?>" />
 		</form>
-		<div><a href="#" id="change-password">schimbati parola</a></div>
 	<?php } else { ?>
 		<?php echo $row['location']; ?>
 	<?php } ?>

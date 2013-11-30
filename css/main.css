@@ -488,3 +488,28 @@ form {
 	width: auto;
 	margin-right: 10px;
 }
+#profile-avatar #change-password {
+	color: #333;
+	font-size: 10px;
+	cursor: pointer;
+}
+#changepass label,
+#changepass button, 
+#changepass input {
+	width: 250px;
+	display: block;
+	padding: 5px;
+	margin: 0 auto 10px auto;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
+#changepass label {
+	border: 0;
+	margin-bottom: 0;
+}
+#changepass button {
+	background: #333;
+	color: #fff;
+	border: 1px solid #333;
+	cursor: pointer;
+}
