@@ -513,3 +513,9 @@ form {
 	border: 1px solid #333;
 	cursor: pointer;
 }
+.rotate-image {
+	font-size: 28px;
+	cursor: pointer;
+	margin-top: 8px;
+	margin-right: 8px;
+}
