@@ -8,7 +8,7 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/css/main.css" />
-	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;language=ro"></script>
@@ -34,13 +34,18 @@ if (!in_array($_SERVER['REMOTE_ADDR'],$servers)) {
 }
 ?>
 <div class="page-wrapper">
+<img class="logo" src="/img/ceauro-logo.png" alt="ceau.ro - un loc unde te poti conecta cu ai tai prieteni" />
 <nav>
-	<img src="/img/ceauro-logo.png" alt="ceau.ro - un loc unde te poti conecta cu ai tai prieteni" />
-	<a class="logo" href="/">acasa</a>
+	<a class="left" href="https://www.facebook.com/ceauromania" target="_blank"><i class="fa fa-facebook-square"></i></a>
 	<?php if (_USERNAME != '') { ?>
-	<a class="logo" href="/map.html">harta</a>
-	<a class="followers" href="/followers.html">urmaritii</a>
-	<a id="logout-link" href="/logout">ieșire</a>
-	<a href="/<?php echo _USERNAME; ?>" class="username"><?php echo _USERNAME; ?></a>
+	<a id="logout-link" class="right" href="/logout"><i class="fa fa-sign-out"></i></a>
+	<a href="/<?php echo _USERNAME; ?>" class="username right"><?php echo _USERNAME; ?></a>
+	<?php } ?>
+</nav>
+<nav>
+	<a class="left" href="/"><i class="fa fa-home"></i></a>
+	<?php if (_USERNAME != '') { ?>
+	<a class="left" href="/map.html">harta</a>
+	<a class="followers left" href="/followers.html">urmaritii</a>
 	<?php } ?>
 </nav>
