@@ -36,16 +36,16 @@ if (!in_array($_SERVER['REMOTE_ADDR'],$servers)) {
 <div class="page-wrapper">
 <img class="logo" src="/img/ceauro-logo.png" alt="ceau.ro - un loc unde te poti conecta cu ai tai prieteni" />
 <nav>
-	<a class="left" href="https://www.facebook.com/ceauromania" target="_blank"><i class="fa fa-facebook-square"></i></a>
-	<?php if (_USERNAME != '') { ?>
-	<a id="logout-link" class="right" href="/logout"><i class="fa fa-sign-out"></i></a>
-	<a href="/<?php echo _USERNAME; ?>" class="username right"><?php echo _USERNAME; ?></a>
-	<?php } ?>
-</nav>
-<nav>
 	<a class="left" href="/"><i class="fa fa-home"></i></a>
 	<?php if (_USERNAME != '') { ?>
 	<a class="left" href="/map.html">harta</a>
 	<a class="followers left" href="/followers.html">urmaritii</a>
+	<?php } ?>
+</nav>
+<nav>
+	<a class="left" href="https://www.facebook.com/ceauromania" target="_blank"><i class="fa fa-facebook-square"></i></a>
+	<?php if (_USERNAME != '') { ?>
+	<a id="logout-link" class="right" href="/logout"><i class="fa fa-sign-out"></i></a>
+	<a href="/<?php echo _USERNAME; ?>" class="username right"><?php echo _USERNAME; ?></a>
 	<?php } ?>
 </nav>
