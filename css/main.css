@@ -132,6 +132,21 @@ a:hover {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+#tweets .follow,
+#tweets .unfollow {
+	border: 0;
+	border-radius: 0;
+	margin-top: 5px;
+	width: 80px;
+}
+#tweets .unfollow {
+	color: #000;
+	background: #ddd;
+}
+#tweets .unfollow:hover {
+	color: #000;
+	background: #ddd;
+}
 #tweets .poster {
 	font-weight: bold;
 }

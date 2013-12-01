@@ -8,7 +8,9 @@ function template_post($row) {
 	?>
 	<li id="post_<?php echo $row['id']; ?>">
 		<div class="avatar"><img src="<?php echo $f->userLink($row['poster']); ?>/photos/<?php echo $row['mainimgid']; ?>_small.jpg" /></div>
-		<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> <?php if ($row['location'] != '') { ?><span class="location">( <?php echo $row['location']; ?> )</span><?php } ?>
+		<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> 
+		<?php if ($row['location'] != '') { ?><span class="location">( <?php echo $row['location']; ?> )</span><?php } ?>
+		<div><?php showfollowbutton($row['poster']); ?></div>
 		<div class="content" data-imageid="<?php echo $row['postimg']; ?>">
 			<?php echo $row['details']; ?>
 			<?php 
@@ -50,6 +52,25 @@ function template_post($row) {
 	</li>
 	<?php
 }
+
+function showfollowbutton($profile_un) {
+	if ($profile_un != _USERNAME) {
+		$sql_count = "SELECT COUNT(*) AS followcount 
+				FROM follows 
+				WHERE `username` = '"._USERNAME."'
+					AND `isfollowing` = '".$profile_un."'";
+		$res_count = mysql_query($sql_count);
+		$row_count = mysql_fetch_assoc($res_count);
+		$followcount = $row_count['followcount'];
+		if ($followcount > 0) {
+			?><a class="unfollow" data-username="<?php echo $profile_un; ?>" href="#follow"><span class="active">mă urmați</span><span class="hover">nu urmați</span></a><?php 
+		} else { 
+			?><a class="follow" data-username="<?php echo $profile_un; ?>" href="#follow">urmați-mă</a><?php 
+		}
+	}
+
+}
+
 
 function showMap () {
 	$f = new Functions();
