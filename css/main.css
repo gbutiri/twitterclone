@@ -175,9 +175,24 @@ a:hover {
 	float: right;
 }
 
+nav {
+	overflow: hidden;
+}
+nav a {
+	display: inline-block;
+	position: relative;
+	float: left;
+	line-height: 50px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+nav img {
+	float: left;
+}
 .logo {
 	text-decoration: none;
 	font-weight: bold;
+	
 }
 .logo span {
 	color: #333;

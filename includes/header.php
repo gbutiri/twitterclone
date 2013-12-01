@@ -35,11 +35,12 @@ if (!in_array($_SERVER['REMOTE_ADDR'],$servers)) {
 ?>
 <div class="page-wrapper">
 <nav>
-	<a class="logo" href="/">ceau<span>.ro</span></a>
+	<img src="/img/ceauro-logo.png" alt="ceau.ro - un loc unde te poti conecta cu ai tai prieteni" />
+	<a class="logo" href="/">acasa</a>
 	<?php if (_USERNAME != '') { ?>
 	<a class="logo" href="/map.html">harta</a>
 	<a class="followers" href="/followers.html">urmaritii</a>
 	<a id="logout-link" href="/logout">ieșire</a>
-	<?php } ?>
 	<a href="/<?php echo _USERNAME; ?>" class="username"><?php echo _USERNAME; ?></a>
+	<?php } ?>
 </nav>
