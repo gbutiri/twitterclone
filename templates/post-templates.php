@@ -61,6 +61,7 @@ function showMap () {
 	$counter = mysql_num_rows($res);
 	$data = array("count" => $counter, "stores" => array());
 	$tmpData = '';
+	$center = '';
 	while ($row = mysql_fetch_assoc($res)) {
 		$imglink = $f->userLink($row['username']).'/photos/'.$row['mainimgid'].'_small.jpg';
 		//var_dump($row);
@@ -75,13 +76,16 @@ function showMap () {
 				"img" => $profilelink,
 				"location" => $row['location']
 		);
+		if ($center == '') {
+			$center = $row['lat'].','.$row['long'];
+		}
 		array_push($data["stores"],$tmpData);
 	}	
 	?>
 	<script>
 		var data = <?php echo json_encode($data); ?>;
 		function initialize() {
-			var center = new google.maps.LatLng(37.4419, -122.1419);
+			var center = new google.maps.LatLng(<?php echo $center; ?>);
 			var infoWindow = new google.maps.InfoWindow();
 
 			var map = new google.maps.Map(document.getElementById('map'), {
