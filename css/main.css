@@ -548,3 +548,51 @@ form {
 	margin-top: 8px;
 	margin-right: 8px;
 }
+
+.logintabs {
+	overflow: hidden;
+	margin-bottom: -1px;
+	z-index: 1;
+}
+.logintabs li {
+	float: left;
+	width: 50%;
+	position: relative;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	margin-top: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.logintabs li:first-child {
+	border-right: 0px;
+}
+.logintabs a {
+	background: #ccc;
+	padding-top: 10px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	padding-bottom: 10px;
+}
+.logintabs a.active {
+	background: #fff;
+}
+.logintabs a:hover {
+	background: #ddd;
+}
+.logintabs a.active:hover {
+	background: #fff;
+}
+#signup-form {
+	display: none;
+}
+.loginforms {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	border: 1px solid #ccc;
+}

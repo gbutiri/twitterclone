@@ -317,6 +317,14 @@ $(document).ready(function(){
 				$(document).find('#change-messages').html(data.message);
 			}
 		});
+	}).on('click','#logintabs a',function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var $activetab = $('#'+$this.attr('data-click'));
+		$('#loginforms form').hide();
+		$('#logintabs a').removeClass('active');
+		$this.addClass('active');
+		$activetab.show();
 	});
 	
 	
