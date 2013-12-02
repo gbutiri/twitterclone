@@ -8,7 +8,11 @@ function template_post($row) {
 	?>
 	<li id="post_<?php echo $row['id']; ?>">
 		<div class="avatar"><img src="<?php echo $f->userLink($row['poster']); ?>/photos/<?php echo $row['mainimgid']; ?>_small.jpg" /></div>
-		<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> 
+		<?php if (_USERNAME != '') { ?>
+			<a href="/<?php echo $row['poster']; ?>" class="poster"><?php echo $row['poster']; ?></a> 
+		<?php } else { ?>
+			<?php echo $row['poster']; ?>
+		<?php } ?>
 		<?php if ($row['location'] != '') { ?><span class="location">( <?php echo $row['location']; ?> )</span><?php } ?>
 		<div><?php showfollowbutton($row['poster']); ?></div>
 		<div class="content" data-imageid="<?php echo $row['postimg']; ?>">

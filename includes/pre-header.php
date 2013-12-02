@@ -3,10 +3,21 @@ include (_DOCROOT.'/includes/class.db.php');
 setlocale(LC_TIME, array('ro.utf-8', 'ro_RO.UTF-8', 'ro_RO.utf-8', 'ro', 'ro_RO', 'ro_RO.ISO8859-2'));
 $strposlogin = strpos($_SERVER['SCRIPT_FILENAME'],'/login.php');
 $strposabout = strpos($_SERVER['SCRIPT_FILENAME'],'/about.php');
+$strpospostcalls = strpos($_SERVER['SCRIPT_FILENAME'],'/postcalls.php');
+$strposprofilecalls = strpos($_SERVER['SCRIPT_FILENAME'],'/profile-calls.php');
 $strposmap = strpos($_SERVER['SCRIPT_FILENAME'],'/map.php');
 
-if (_USERNAME == '' && $strposlogin === false && $strposabout === false && $strposmap === false) {
-	header('location: /login.html');
+//var_dump(_USERNAME == '' && $strposlogin);
+
+if (_USERNAME == '' && $strposlogin !== false) {
+} elseif (_USERNAME == '' && $strpospostcalls !== false) {
+} elseif (_USERNAME == '' && $strposprofilecalls !== false) {
+} else {
+	if (_USERNAME == '' && $strposlogin === false && $strposabout === false && $strposmap === false) {
+		//var_dump(_USERNAME, $_SERVER['SCRIPT_FILENAME']);
+		//exit(0);
+		header('location: /login.html');
+	}
 }
 
 define ('_TITLE',"ceau.ro - conectați-vă cu prieteni Români!");

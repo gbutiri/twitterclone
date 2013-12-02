@@ -262,9 +262,15 @@ $(document).ready(function(){
 			url: '/ajax/profile-calls.php?action='+$action+'&tofollow='+$tofollow,
 			dataType: 'JSON',
 			success: function(data) {
-				$this.html(data.replace);
-				$this.toggleClass('follow unfollow');
-				// TODO - convert follow button into following. hover over = unfollow.
+				if (data.error) {
+					notify(data.message);
+					if (data.other == 'click') {
+						$(document).find(data.click).click();
+					}
+				} else {
+					$this.html(data.replace);
+					$this.toggleClass('follow unfollow');
+				}
 			}
 		});
 	}).on('click','#postimage',function(e) {
@@ -321,7 +327,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var $this = $(this);
 		var $activetab = $('#'+$this.attr('data-click'));
-		$('#loginforms form').hide();
+		$('#loginforms .tab-contents').hide();
 		$('#logintabs a').removeClass('active');
 		$this.addClass('active');
 		$activetab.show();

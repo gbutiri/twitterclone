@@ -556,7 +556,7 @@ form {
 }
 .logintabs li {
 	float: left;
-	width: 50%;
+	width: 33.333333%;
 	position: relative;
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
@@ -587,6 +587,9 @@ form {
 	background: #fff;
 }
 #signup-form {
+	display: none;
+}
+#signin-form {
 	display: none;
 }
 .loginforms {

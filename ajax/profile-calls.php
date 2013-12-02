@@ -259,14 +259,24 @@ function like() {
 }
 
 function follow() {
-	$tofollow = isset($_GET['tofollow']) ? trim($_GET['tofollow']) : '';
-	$sql = "REPLACE INTO follows (`username`,`isfollowing`) VALUES ('"._USERNAME."','".$tofollow."')";
-	$res = mysql_query($sql);
-	
-	echo json_encode(array(
-		"error" => false,
-		"replace" => '<span class="active">mă urmați</span><span class="hover">nu urmați</span>'
-	));
+	//var_dump(_USERNAME);
+	if (_USERNAME == '') {
+		echo json_encode(array(
+			"error" => true,
+			"message" => 'Va rugam inregistrati-va sa puteti urmari persoana respectiva.',
+			"other" => "click",
+			"click" => '.logintabs a[data-click="signup-form"]'
+		));
+	} else {
+		$tofollow = isset($_GET['tofollow']) ? trim($_GET['tofollow']) : '';
+		$sql = "REPLACE INTO follows (`username`,`isfollowing`) VALUES ('"._USERNAME."','".$tofollow."')";
+		$res = mysql_query($sql);
+		
+		echo json_encode(array(
+			"error" => false,
+			"replace" => '<span class="active">mă urmați</span><span class="hover">nu urmați</span>'
+		));
+	}
 }
 function unfollow() {
 	$tofollow = isset($_GET['tofollow']) ? trim($_GET['tofollow']) : '';

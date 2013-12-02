@@ -15,11 +15,13 @@ Conectați-vă cu prieteni Români!
 
 
 <ul class="logintabs" id="logintabs">
-	<li><a href="#" data-click="signin-form" class="active">Conectare</a></li>
+	<li><a href="#" data-click="tweets" class="active">Ceau.ro</a></li>
+	<li><a href="#" data-click="signin-form">Conectare</a></li>
 	<li><a href="#" data-click="signup-form">Înregistrare</a></li>
 </ul>
 <div id="loginforms" class="loginforms">
-	<form method="POST" id="signin-form" class="registration-forms" action="/ajax/registration.php?action=trylogin">
+	<div class="tab-contents" id="tweets"></div>
+	<form method="POST" id="signin-form" class="tab-contents registration-forms" action="/ajax/registration.php?action=trylogin">
 		<label>Nume de utilizator:</label>
 		<div><input type="text" name="signin-username" id="signin-username" /></div>
 		<label>Parolă:</label>
@@ -34,7 +36,7 @@ Conectați-vă cu prieteni Români!
 			<a href="#" id="forgot-password">Mi-am uitat parola</a>
 		</div>
 	</form>
-	<form method="POST" id="signup-form" class="registration-forms" action="/ajax/registration.php?action=trysignup">
+	<form method="POST" id="signup-form" class="tab-contents registration-forms" action="/ajax/registration.php?action=trysignup">
 		<label>E-mail:</label>
 		<div><input type="text" name="signup-email" id="signup-email" /></div>
 		<label>Nume de utilizator:</label>

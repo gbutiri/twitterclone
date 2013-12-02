@@ -70,7 +70,9 @@ function makeapost() {
 
 function getlatestposts() {
 	include(_DOCROOT.'/templates/post-templates.php');
-
+	
+	//var_dump($_GET['username']);
+	//exit(0);
 	$username = $_GET['username'];
 	$sql_pre = "";
 	$sql_where = "";
