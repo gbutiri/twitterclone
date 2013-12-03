@@ -115,33 +115,50 @@ Class Functions {
 					$dst_ratio = $dst_w / $dst_h;
 					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h);
 					
-					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
-					$src_image = imagecreatefromjpeg($absPhotoFile);
-					
 					//$handle = fopen("log.txt","w+");
 					//fwrite($handle,var_export(exif_read_data($absPhotoFile),true));
 					//fclose($handle);
 					//var_export(exif_read_data($absPhotoFile));
 					//var_dump($src_image);
-					
+					//exit(0);
 					// this is to place the image in the center.
 					$dst_x = 0;
 					$dst_y = 0;
-					if (!$post) {
-						if ($src_ratio > $dst_ratio) {
-							$shrinkRatio = $dst_h / $src_h ;
-							$dst_w = $imageSize[1]; //$src_w*$shrinkRatio;
-							$diffOffset = (($dst_w-$imageSize[1])/2);
-							$dst_x = -$diffOffset;
-						} elseif ($src_ratio < $dst_ratio) {
-							$shrinkRatio = $dst_w / $src_w ;
-							$dst_h = $imageSize[2]; //$src_h*$shrinkRatio;
-							$diffOffset = (($dst_h-$imageSize[2])/2);
-							$dst_y = -$diffOffset;
-						}
+					//if (!$post) {
+					// 
+					/*
+					src_x is where we're cropping from. 
+					If image is taller, 
+						our src_x is 0, 
+						src_y is somewhere down the image.
+						src_w is width of the image.
+						src_h is somewhere before the bottom of the image.
+					If image is wider,
+						our src_x is somewhere to the right.
+						src_y is 0.
+						src_w is somewhere left of the right edge
+						src_h is height of image
+					*/
+					if ($src_ratio > $dst_ratio) {
+						$shrinkRatio = $dst_h / $src_h ;
+						$dst_w = $imageSize[1];
+						//$dst_w = $src_w*$shrinkRatio;
+						$diffOffset = (($dst_w-$imageSize[1])/2);
+						$dst_x = -$diffOffset;
+					} elseif ($src_ratio < $dst_ratio) {
+						$shrinkRatio = $dst_w / $src_w ;
+						$dst_h = $imageSize[2];
+						//$dst_h = $src_h*$shrinkRatio;
+						$diffOffset = (($dst_h-$imageSize[2])/2);
+						$dst_y = -$diffOffset;
 					}
+					//}
+					//var_dump($src_ratio, $dst_ratio,$shrinkRatio);
 					//var_dump($src_ratio,$dst_ratio,$dst_w,$dst_h,$shrinkRatio);
 					// dst_ variables can be re-set to the post variables passed in.
+					
+					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
+					$src_image = imagecreatefromjpeg($absPhotoFile);
 					
 					$src_x = 0;
 					$src_y = 0;
@@ -153,6 +170,7 @@ Class Functions {
 						$src_w=$_POST['w'];
 						$src_h=$_POST['h'];
 					}
+					//var_dump("---",$_POST);
 					imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
 					//var_dump($_POST,$dst_x,$dst_y,$dst_w,$dst_h);
 					imagejpeg($dst_image, $newPhotoFile, 75);
