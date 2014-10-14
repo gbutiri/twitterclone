@@ -69,7 +69,7 @@ function getlatestposts() {
 
 function loadmore() {
 	include(_DOCROOT.'/templates/post-templates.php');
-	$firstId = $_GET['firstid'];
+	$firstId = (int) $_GET['firstid'];
 	
 	$sql_a = "SELECT COUNT(*) AS totalMessages FROM posts WHERE id < ".$firstId." ORDER BY id DESC";
 	$res_a = mysql_query($sql_a);
